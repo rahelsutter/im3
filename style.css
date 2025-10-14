@@ -1,11 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  --orange: #C26E4B;  /* Balken / Hintergrund */
-  --blue:   #51657E;  /* Canvas-Farbe */
-  --text:   #ffffff;  /* Schriftfarbe */
+  --orange: #C26E4B;  /* Hintergrundfarbe Website */
+  --blue:   #51657E;  /* Hintergrunddarbe Weltkarte */
+  --text:   #ffffff;  /* Farbe der Schrift */
 }
 
 body {
-  margin: 0;
   background: var(--orange);
   color: var(--text);
   font-family: 'Rubik', sans-serif;
@@ -13,11 +18,10 @@ body {
 
 header {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 12px 20px;
 }
 
-/* Kartenfläche */
+/* Container Weltkarte */
 .worldMapContainer {
   background: var(--blue);
   border-bottom-left-radius: 12px;
@@ -31,7 +35,7 @@ header {
 
 /* SVG-Karte */
 .worldmap {
-  display: block;
+  display: flex;
   width: 100%;
   height: auto;
   margin: 0 auto;
