@@ -23,8 +23,10 @@ body {
 }
 
 header {
-  max-width: 1200px;
-  padding: 12px 20px;
+  display: flex; 
+  align-items: flex-start;
+  padding: 6rem;
+  margin: 3rem auto;
 }
 
 /* Container Weltkarte */
