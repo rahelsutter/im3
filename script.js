@@ -22,11 +22,54 @@ try {
     }
 }
 
-
+/*
 const datepicker = document.querySelector('#datepicker');
 datepicker.addEventListener('change', function() {
     const date = datepicker.value;
     console.log(date);
+})*/
+
+const Pin_Bern = document.querySelector('#Pin_Bern');
+const Pin_Cairo = document.querySelector('#Pin_Cairo');
+const Pin_Vancouver = document.querySelector('#Pin_Vancouver');
+const Pin_RiodeJaneiro = document.querySelector('#Pin_RiodeJaneiro');
+const Pin_Shanghai = document.querySelector('#Pin_Shanghai');
+const Pin_Melbourne = document.querySelector('#Pin_Melbourne');
+
+Pin_Bern.addEventListener('click', function() {
+    console.log('Pin_Bern');
+    showDialogByPlace('Pin_Bern');
+})
+Pin_Cairo.addEventListener('click', function() {
+    console.log('Pin_Cairo');
+    showDialogByPlace('Pin_Cairo');
+})
+Pin_Vancouver.addEventListener('click', function() {
+    console.log('Pin_Vancouver');
+    showDialogByPlace('Pin_Vancouver');
+})
+Pin_RiodeJaneiro.addEventListener('click', function() {
+    console.log('Pin_RiodeJaneiro');
+    showDialogByPlace('Pin_RiodeJaneiro');
+})
+Pin_Shanghai.addEventListener('click', function() {
+    console.log('Pin_Shanghai');
+    showDialogByPlace('Pin_Shanghai');
+})
+Pin_Melbourne.addEventListener('click', function() {
+    console.log('Pin_Melbourne');
+    showDialogByPlace('Pin_Melbourne');
 })
 
 
+const dialog = document.querySelector('#dialog');
+function showDialogByPlace(place) {
+    dialog.showModal();
+    standort.innerText = place;
+}
+
+const btn_close = document.querySelector('#close');
+btn_close.addEventListener('click', function() {
+    dialog.close();
+    standort.innerText = '';
+});
