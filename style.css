@@ -69,17 +69,14 @@ main {
  }
 
 
- svg {
-    width: 100%;
-    max-height: 100vh;
-}
-#Pin_Vancouver {
+
+#Pin_Vancouver, #Pin_Bern, #Pin_Melbourne, #Pin_Shanghai, #Pin_Cairo, #Pin_RiodeJaneiro {
     cursor: pointer;
 }
 
 dialog {
-    width: 90%;
-    height: 70%;
+    width: 80vw;
+    height: 90vh;
     max-width: unset;
     max-height: unset;
     left: 50%;
