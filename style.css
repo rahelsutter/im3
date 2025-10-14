@@ -6,9 +6,9 @@
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
   background: var(--orange);
   color: var(--text);
+  font-family: 'Rubik', sans-serif;
 }
 
 header {
@@ -39,6 +39,7 @@ header nav a:hover { text-decoration: underline; }
 }
 
 .hero-title {
+  font-family: josefin sans, sans-serif;
   margin: 0;
   font-size: clamp(28px, 4vw, 56px);
   font-weight: 800;
@@ -63,7 +64,3 @@ header nav a:hover { text-decoration: underline; }
   height: auto;
   margin: 0 auto;
 }
-
-/*
-1. Schriften einbetten
-*/

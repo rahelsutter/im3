@@ -28,3 +28,5 @@ datepicker.addEventListener('change', function() {
     const date = datepicker.value;
     console.log(date);
 })
+
+
