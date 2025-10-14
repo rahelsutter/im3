@@ -5,14 +5,18 @@
 }
 
 :root {
-  --orange: #C26E4B;  /* Hintergrundfarbe Website */
-  --blue:   #51657E;  /* Hintergrunddarbe Weltkarte */
-  --text:   #ffffff;  /* Farbe der Schrift */
+  --orange: #C26E4B;  /* Hintergrund Website */
+  --blue:   #51657E;  /* Hintergrund Weltkarte */
+  --beige:   #f5e8ca;  /* Hintergrund Postkarten */
 }
+
+h1 {
+  color: #ffffff;
+}
+
 
 body {
   background: var(--orange);
-  color: var(--text);
   font-family: 'Rubik', sans-serif;
 }
 
