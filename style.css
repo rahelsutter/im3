@@ -10,13 +10,10 @@
   --beige:   #f5e8ca;  /* Hintergrund Postkarten */
 }
 
-h1 {
-  color: #ffffff;
-  font-size: clamp(1.8rem, 5vw, 5rem);
-  font-weight: 700;
-}
-
 body {
+  display: grid;
+  grid-template-rows: 15vh 1fr 5vh;
+  height: 100vh;
   background: var(--orange);
   font-family: 'Rubik', sans-serif;
 }
@@ -26,26 +23,39 @@ header {
   justify-content: flex-start;
   align-items: center;
   padding: 2rem 3rem;
-  max-height: 15vh;
  }
+
+ h1 {
+  color: #ffffff;
+  font-size: clamp(1.8rem, 5vw, 5rem);
+  font-weight: 700;
+}
 
 /* Container Weltkarte */
 .worldMapContainer {
+  display: flex;
   background: var(--blue);
-  border-top-left-radius: 28px;
-  margin: 0rem 0rem 0rem 3rem;
+  border-top-left-radius: 30px;
+  margin-left: 3rem;
   padding: 3rem 0rem;
-  position: relative;
   overflow: hidden;
-  max-height: 80vh;
-}
+  align-items: center;
+  justify-content: center;
+   }
 
 /* SVG-Karte */
 #WorldMapwithPins {
   display: flex;
   justify-content: center;
+  height: auto;
+  width: 100%;
  }
 
  footer {
-  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--blue);
+  padding-right: 3rem;
+  margin-left: 3rem;
  }
