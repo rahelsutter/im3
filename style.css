@@ -12,6 +12,8 @@
 
 h1 {
   color: #ffffff;
+  font-size: clamp(1.8rem, 5vw, 5rem);
+  font-weight: 700;
 }
 
 
