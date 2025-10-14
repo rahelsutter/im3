@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 :root {
@@ -12,7 +13,7 @@
 
 body {
   display: grid;
-  grid-template-rows: 15vh 1fr 5vh;
+  grid-template-rows: 20vh 1fr 5vh;
   height: 100vh;
   background: var(--orange);
   font-family: 'Rubik', sans-serif;
@@ -22,7 +23,8 @@ header {
   display: flex; 
   justify-content: flex-start;
   align-items: center;
-  padding: 2rem 3rem;
+  padding: 0rem 3rem;
+  height: 100%;
  }
 
  h1 {
@@ -31,24 +33,27 @@ header {
   font-weight: 700;
 }
 
+main {
+  height: 100%;
+  margin-left: 3rem;
+}
+
 /* Container Weltkarte */
 .worldMapContainer {
   display: flex;
   background: var(--blue);
   border-top-left-radius: 30px;
-  margin-left: 3rem;
-  padding: 3rem 0rem;
-  overflow: hidden;
   align-items: center;
   justify-content: center;
+  height: 100%;
    }
 
 /* SVG-Karte */
 #WorldMapwithPins {
   display: flex;
   justify-content: center;
-  height: auto;
-  width: 100%;
+  height: 90%;
+  width: 95%;
  }
 
  footer {
@@ -58,4 +63,5 @@ header {
   background: var(--blue);
   padding-right: 3rem;
   margin-left: 3rem;
+  height: 100%;
  }
