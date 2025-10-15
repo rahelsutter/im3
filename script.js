@@ -73,3 +73,33 @@ btn_close.addEventListener('click', function() {
     dialog.close();
     standort.innerText = '';
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const pinIds = [
+    "Pin_Vancouver",
+    "Pin_RiodeJaneiro",
+    "Pin_Bern",
+    "Pin_Cairo",
+    "Pin_Shanghai",
+    "Pin_Melbourne"
+  ];
+
+  pinIds.forEach(id => {
+    const pin = document.getElementById(id);
+    if (!pin) return;
+
+    pin.style.transformBox = "fill-box";
+    pin.style.transformOrigin = "center";
+    pin.style.transition = "transform 0.2s ease";
+
+    // evtl. Skalierung noch etwas kleiner bzw. schöner machen //
+
+    pin.addEventListener("mouseenter", () => {
+      pin.style.transform = "scale(1.3)";
+    });
+
+    pin.addEventListener("mouseleave", () => {
+      pin.style.transform = "scale(1)";
+    });
+  });
+});
