@@ -36,42 +36,49 @@ const Pin_RiodeJaneiro = document.querySelector('#Pin_RiodeJaneiro');
 const Pin_Shanghai = document.querySelector('#Pin_Shanghai');
 const Pin_Melbourne = document.querySelector('#Pin_Melbourne');
 
-Pin_Bern.addEventListener('click', function() {
-    console.log('Pin_Bern');
-    showDialogByPlace('Pin_Bern');
-})
-Pin_Cairo.addEventListener('click', function() {
-    console.log('Pin_Cairo');
-    showDialogByPlace('Pin_Cairo');
-})
-Pin_Vancouver.addEventListener('click', function() {
-    console.log('Pin_Vancouver');
-    showDialogByPlace('Pin_Vancouver');
-})
-Pin_RiodeJaneiro.addEventListener('click', function() {
-    console.log('Pin_RiodeJaneiro');
-    showDialogByPlace('Pin_RiodeJaneiro');
-})
-Pin_Shanghai.addEventListener('click', function() {
-    console.log('Pin_Shanghai');
-    showDialogByPlace('Pin_Shanghai');
-})
-Pin_Melbourne.addEventListener('click', function() {
-    console.log('Pin_Melbourne');
-    showDialogByPlace('Pin_Melbourne');
-})
-
-
 const dialog = document.querySelector('#dialog');
-function showDialogByPlace(place) {
+const postcardImg = document.querySelector('#postcard-image');
+const btn_close = document.querySelector('#btn-close');
+
+function openPostcard(city, imagePath) {
+  postcardImg.alt = `Postkarte ${city}`;
+
+  const preloadImg = new Image();
+  preloadImg.src = imagePath;
+
+  preloadImg.onload = () => {
+    postcardImg.src = imagePath;
+
     dialog.showModal();
-    standort.innerText = place;
+  };
 }
 
-const btn_close = document.querySelector('#close');
+Pin_Bern.addEventListener('click', () => {
+  openPostcard('Bern', 'assets/Postkarte_Bern.png');
+});
+
+Pin_Vancouver.addEventListener('click', () => {
+  openPostcard('Vancouver', 'assets/Postkarte_Vancouver.png');
+});
+
+Pin_RiodeJaneiro.addEventListener('click', () => {
+  openPostcard('Rio de Janeiro', 'assets/Postkarte_RiodeJaneiro.png');
+});
+
+Pin_Cairo.addEventListener('click', () => {
+  openPostcard('Kairo', 'assets/Postkarte_Kairo.png');
+});
+
+Pin_Shanghai.addEventListener('click', () => {
+  openPostcard('Shanghai', 'assets/Postkarte_Shanghai.png');
+});
+
+Pin_Melbourne.addEventListener('click', () => {
+  openPostcard('Melbourne', 'assets/Postkarte_Melbourne.png');
+});
+
 btn_close.addEventListener('click', function() {
-    dialog.close();
-    standort.innerText = '';
+  dialog.close();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -92,8 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
     pin.style.transformOrigin = "center";
     pin.style.transition = "transform 0.2s ease";
 
-    // evtl. Skalierung noch etwas kleiner bzw. schöner machen //
-
     pin.addEventListener("mouseenter", () => {
       pin.style.transform = "scale(1.3)";
     });
@@ -102,4 +107,17 @@ document.addEventListener("DOMContentLoaded", () => {
       pin.style.transform = "scale(1)";
     });
   });
+});
+
+// i-PopUp //
+const btn_info = document.querySelector('#btn-info');
+const infoOverlay = document.querySelector('#info-overlay');
+const infoClose = document.querySelector('#info-close');
+
+btn_info.addEventListener('click', () => {
+  infoOverlay.style.display = 'block';
+});
+
+infoClose.addEventListener('click', () => {
+  infoOverlay.style.display = 'none';
 });
