@@ -18,7 +18,7 @@ try {
     $stmt = $pdo->prepare($sql);
 
     // -> sql statement ausführen
-    $stmt->execute( ['today' => $date ] );
+    $stmt->execute( ['date' => $date ] );
 
     // -> daten in empfang nehmen
     $results = $stmt->fetchAll();
