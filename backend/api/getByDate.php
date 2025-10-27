@@ -12,13 +12,14 @@ try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
     $date = $_GET['date'];
+    $city = $_GET['city'];
 
     //-> sql statement schreiben
-    $sql = "SELECT * FROM im3_air_pollution WHERE DATE(timestamp) = :date";
+    $sql = "SELECT * FROM im3_air_pollution WHERE DATE(timestamp) = :date AND city = :city";
     $stmt = $pdo->prepare($sql);
 
     // -> sql statement ausführen
-    $stmt->execute( ['date' => $date ] );
+    $stmt->execute( ['date' => $date,'city' => $city ] );
 
     // -> daten in empfang nehmen
     $results = $stmt->fetchAll();
