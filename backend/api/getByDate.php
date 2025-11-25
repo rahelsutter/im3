@@ -15,7 +15,17 @@ try {
     $city = $_GET['city'];
 
     //-> sql statement schreiben
-    $sql = "SELECT * FROM im3_air_pollution WHERE DATE(timestamp) = :date AND city = :city";
+  //  $sql = "SELECT * FROM im3_air_pollution WHERE DATE(timestamp) = :date AND city = :city";
+    $date = $_GET['date']; // Format: YYYY-MM-DD
+    $time = $_GET['time']; // Format: HH:00:00 (da stündlich)
+    $city = $_GET['city'];
+
+    // Kombiniere Datum und Zeit
+$datetime = $date . ' ' . $time;
+
+    $sql = "SELECT * FROM im3_air_pollution WHERE timestamp = :datetime AND city = :city";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['datetime' => $datetime, 'city' => $city]);
     $stmt = $pdo->prepare($sql);
 
     // -> sql statement ausführen

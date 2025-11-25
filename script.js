@@ -121,3 +121,19 @@ btn_info.addEventListener('click', () => {
 infoClose.addEventListener('click', () => {
   infoOverlay.style.display = 'none';
 });
+
+
+// Generiere Uhrzeiten von 00:00 bis 23:00
+function populateTimePicker() {
+    const timePicker = document.getElementById('timePicker');
+    for (let i = 0; i < 24; i++) {
+        const hour = i.toString().padStart(2, '0');
+        const option = document.createElement('option');
+        option.value = `${hour}:00:00`;
+        option.textContent = `${hour}:00`;
+        timePicker.appendChild(option);
+    }
+}
+
+// Beim Laden der Seite ausführen
+document.addEventListener('DOMContentLoaded', populateTimePicker);
