@@ -417,5 +417,50 @@
     </div>
 </div>
 
+<!-- Pop-up Modal -->
+<div id="postcardModal" class="modal">
+    <div class="modal-content">
+        <!-- Schließen Button -->
+        <span class="close-modal">&times;</span>
+        
+        <!-- Info Button (oben rechts) -->
+        <button id="infoButton" class="info-button">ℹ️</button>
+        
+        <div class="postcard-container">
+            <!-- Linke Seite: Vorderseite der Postkarte -->
+            <div class="postcard-front" id="postcardFront">
+                <img id="postcardImage" src="" alt="Postkarte">
+                <h2 id="cityName"></h2>
+                
+                <!-- Info-Overlay (anfangs versteckt) -->
+                <div id="infoOverlay" class="info-overlay hidden">
+                    <button id="closeInfo" class="close-info">×</button>
+                    <div class="info-content">
+                        <!-- Deine bestehenden Beschreibungen aus index.html hier einfügen -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rechte Seite: Rückseite der Postkarte -->
+            <div class="postcard-back">
+                <!-- Datepicker oben rechts -->
+                <div class="datepicker-container">
+                    <input type="date" id="datePicker" class="date-input">
+                    <select id="timePicker" class="time-input">
+                        <option value="">Uhrzeit wählen</option>
+                        <!-- Stunden 00:00 bis 23:00 -->
+                    </select>
+                </div>
+                
+                <!-- Grid mit 11 Briefmarken -->
+                <div id="stampsGrid" class="stamps-grid">
+                    <!-- Wird dynamisch mit JavaScript gefüllt -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

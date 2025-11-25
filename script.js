@@ -122,7 +122,6 @@ infoClose.addEventListener('click', () => {
   infoOverlay.style.display = 'none';
 });
 
-
 // Generiere Uhrzeiten von 00:00 bis 23:00
 function populateTimePicker() {
     const timePicker = document.getElementById('timePicker');

@@ -1,9 +1,18 @@
 <?php
 
+// ---- CORS-Freigabe für dein lokales Test-Origin ----
+header("Access-Control-Allow-Origin: http://127.0.0.1:5500"); // oder "*" für „alle“
+header("Access-Control-Allow-Methods: GET, OPTIONS");          // was dein Frontend braucht
+header("Access-Control-Allow-Headers: Content-Type");          // falls nötig
+
+// bei Preflight-Anfragen (OPTIONS) sofort antworten
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204); // leer, aber OK
+    exit;
+}
+
 require_once '../config.php';
 
-// Todo: Diesen Wert validieren 
-// z.B. ists eine erlaubte Stadt?
 $city = $_GET['city'];
 
 try {
