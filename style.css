@@ -227,5 +227,128 @@ dialog {
   color: #000;
 }
 
+/* ========== DATEPICKER & STAMPS STYLES ========== */
+
+/* Datepicker Container */
+.datepicker-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 5;
+}
+
+.date-input, .time-input {
+    padding: 6px 8px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #fff;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.time-input {
+    min-width: 100px;
+}
+
+/* Briefmarken Grid */
+.stamps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 60px 20px 20px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Einzelne Briefmarke */
+.stamp {
+    position: relative;
+    aspect-ratio: 1;
+    border: 3px solid #333;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.stamp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.stamp-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 6px;
+    color: #333;
+    line-height: 1.2;
+}
+
+.stamp-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 4px 0;
+}
+
+.stamp-unit {
+    font-size: 10px;
+    color: #666;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Hover Tooltip */
+.stamp-tooltip {
+    position: absolute;
+    bottom: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--beige);
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 2px solid #333;
+    min-width: 180px;
+    max-width: 250px;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    pointer-events: none;
+}
+
+.stamp:hover .stamp-tooltip {
+    display: block;
+}
+
+.stamp-tooltip p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #000;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.stamp-tooltip strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+/* Loading State */
+.stamps-grid.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 

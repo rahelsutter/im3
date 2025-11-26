@@ -1,4 +1,9 @@
 <?php
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept");
+
 require_once '../config.php';
 header('Content-Type: application/json');
 
@@ -14,6 +19,7 @@ try {
     
     echo json_encode($result);
 } catch (PDOException $e) {
-    die("Verbindung zur Datenbank konnte nicht hergestellt werden: " . $e->getMessage());
+    http_response_code(500);
+    echo json_encode(['error' => $e->getMessage()]);
 }
 ?>
