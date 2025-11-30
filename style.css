@@ -99,18 +99,19 @@ dialog {
 .postcard-front {
   display: grid;
   place-items: center;
+  
 }
 
 .postcard-front img {
   display: block;
-  height: min(64vh, 520px);
+  height: min(64vh);
   width: auto;
 }
 
 .postcard-back {
   background: var(--beige);
-  width: min(420px, 40%);
-  height: min(64vh, 520px);
+  height: min(64vh);
+  width: auto;
 }
 
 #btn-close {
