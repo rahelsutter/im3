@@ -106,7 +106,6 @@ dialog {
 .postcard-front {
   display: grid;
   place-items: center;
- 
 }
 
 .postcard-front img {
@@ -119,7 +118,6 @@ dialog {
 .postcard-back {
   background: var(--beige);
   display: block;
-  height: 100%;
 }
 
 #btn-close {
