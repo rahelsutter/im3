@@ -209,33 +209,39 @@ async function loadLatestData(city) {
 
 // Briefmarken anzeigen
 function displayStamps(data) {
-    stampsGrid.innerHTML = '';
-    stampsGrid.classList.remove('loading');
+  stampsGrid.innerHTML = '';
+  stampsGrid.classList.remove('loading');
+  
+  stampOrder.forEach(key => {
+    const config = stampMapping[key];
+    if (!config) return;
+
+    const stamp = document.createElement('div');
+    stamp.className = 'stamp';
     
-    stampOrder.forEach(key => {
-        if (stampMapping[key]) {
-            const stamp = document.createElement('div');
-            stamp.className = 'stamp';
-            
-            //erklärt, was angezeigt werden soll (wie viel Kommastellen & was wenn kein Wert gefunden werden kann)
-            const value = data[key] !== null && data[key] !== undefined 
-                ? parseFloat(data[key]).toFixed(2) 
-                : '0';
-            
-            stamp.innerHTML = `
-                <div class="stamp-name">${stampMapping[key].name}</div>
-                <div class="stamp-value">${value}</div>
-                <div class="stamp-unit">${stampMapping[key].unit}</div>
-                <div class="stamp-tooltip">
-                    <p><strong>${stampMapping[key].name}</strong></p>
-                    <p>${stampMapping[key].description}</p>
-                </div>
-            `;
-            
-            stampsGrid.appendChild(stamp);
-        }
-    });
+    // erklärt, was angezeigt werden soll (wie viel Kommastellen & was wenn kein Wert gefunden werden kann)
+    const rawValue = data[key];
+    const value = rawValue !== null && rawValue !== undefined
+      ? parseFloat(rawValue).toFixed(2)
+      : '0';
+
+    stamp.innerHTML = `
+      <div class="stamp-image-wrapper">
+        <img 
+          src="${config.image}" 
+          alt="${config.alt}" 
+          class="stamp-image"
+        >
+        <div class="stamp-value-overlay">
+          ${value}
+        </div>
+      </div>
+    `;
+
+    stampsGrid.appendChild(stamp);
+  });
 }
+
 
 // Loading State
 function showLoading() {
