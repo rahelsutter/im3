@@ -96,22 +96,30 @@ dialog {
   padding: 52px 32px 32px;
 }
 
+.postcard-front,
+.postcard-back {
+  max-width: 25vw;
+  width: 100%;
+  aspect-ratio: 3 / 2;   /* oder 4 / 3, was dir vom Look her besser gefällt */
+}
+
 .postcard-front {
   display: grid;
   place-items: center;
-  
+ 
 }
 
 .postcard-front img {
+  object-fit: cover;
   display: block;
-  height: min(64vh);
-  width: auto;
+   width: 100%;
+  height: 100%;
 }
 
 .postcard-back {
   background: var(--beige);
-  height: min(64vh);
-  width: auto;
+  display: block;
+  height: 100%;
 }
 
 #btn-close {
@@ -258,42 +266,20 @@ dialog {
 .stamps-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    padding: 60px 20px 20px;
-    height: 100%;
-    overflow-y: auto;
+    gap: 10px;
+    padding: 30px 20px 20px;
 }
 
 /* Einzelne Briefmarke */
 .stamp {
     position: relative;
     aspect-ratio: 1;
-    border: 3px solid #333;
-    border-radius: 8px;
-    padding: 12px;
-    background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.stamp:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.stamp-name {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 6px;
-    color: #333;
-    line-height: 1.2;
 }
 
 .stamp-value {
@@ -303,11 +289,32 @@ dialog {
     margin: 4px 0;
 }
 
-.stamp-unit {
-    font-size: 10px;
-    color: #666;
-    font-family: 'Josefin Sans', sans-serif;
+.stamp-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
+
+.stamp-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.stamp-value-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;       /* nach Geschmack anpassen */
+  font-weight: 700;
+  color: #000;           /* oder #fff, je nach SVG-Kontrast */
+  text-align: center;
+  pointer-events: none;  /* wichtig: Hover/Click geht auf das ganze Bild */
+}
+
 
 /* Hover Tooltip */
 .stamp-tooltip {
