@@ -15,17 +15,17 @@ let currentCity = '';
 };*/
 
 const stampMapping = {
-   'pm2_5': { image: 'assets/Stamps/ParticulateMatterStamp.svg', alt: 'Particulate Matter in grams per cubic meter'},
-    'dust': { image: 'assets/Stamps/DustStamp.svg', alt: 'Dust in grams per cubic meter'},
-    'uv_index': { image: 'assets/Stamps/UVIndexStamp.svg', alt: 'UV Index'},
-    'nitrogen_dioxide': { image: 'assets/Stamps/NitrogenDioxideStamp.svg', alt: 'Dust in grams per cubic meter'},
-    'carbon_monoxide': { image: 'assets/Stamps/CarbonMonoxideStamp.svg', alt: 'Carbon Monoxide in grams per cubic meter'},
-    'alder_pollen': { image: 'assets/Stamps/AlderPollenStamp.svg', alt: 'State of Alder Pollen in the air'},
-    'birch_pollen': { image: 'assets/Stamps/BirchPollenStamp.svg', alt: 'State of Birch Pollen in the air'},
-    'grass_pollen': { image: 'assets/Stamps/GrassPollenStamp.svg', alt: ' State of Grass Pollen in the air'},
-    'mugwort_pollen': { image: 'assets/Stamps/MugwortPollenStamp.svg', alt: 'State of Mugwort Pollen in the air'},
-    'olive_pollen': { image: 'assets/Stamps/OlivePollenStamp.svg', alt: 'State of Olive Pollen in the air'},
-    'ragweed_pollen': { image: 'assets/Stamps/RagweedPollenStamp.svg', alt: 'State of Ragweed Pollen in the air'},
+   'pm2_5': { image: 'assets/Stamps/ParticulateMatterStamp.svg', alt: 'Particulate Matter in grams per cubic meter', thresholds: { good: 15, medium: 25 }},
+    'dust': { image: 'assets/Stamps/DustStamp.svg', alt: 'Dust in grams per cubic meter', thresholds: { good: 15, medium: 75}},
+    'uv_index': { image: 'assets/Stamps/UVIndexStamp.svg', alt: 'UV Index', thresholds: { good: 2, medium: 7}},
+    'nitrogen_dioxide': { image: 'assets/Stamps/NitrogenDioxideStamp.svg', alt: 'Nitrogen Dioxide in grams per cubic meter', thresholds: { good: 25, medium: 50}},
+    'carbon_monoxide': { image: 'assets/Stamps/CarbonMonoxideStamp.svg', alt: 'Carbon Monoxide in grams per cubic meter', thresholds: { good: 1000, medium: 4000}},
+    'alder_pollen': { image: 'assets/Stamps/AlderPollenStamp.svg', alt: 'State of Alder Pollen in the air', thresholds: { good: 10, medium: 50}},
+    'birch_pollen': { image: 'assets/Stamps/BirchPollenStamp.svg', alt: 'State of Birch Pollen in the air', thresholds: { good: 10, medium: 50}},
+    'grass_pollen': { image: 'assets/Stamps/GrassPollenStamp.svg', alt: ' State of Grass Pollen in the air', thresholds: { good: 10, medium: 50}},
+    'mugwort_pollen': { image: 'assets/Stamps/MugwortPollenStamp.svg', alt: 'State of Mugwort Pollen in the air', thresholds: { good: 10, medium: 50}},
+    'olive_pollen': { image: 'assets/Stamps/OlivePollenStamp.svg', alt: 'State of Olive Pollen in the air', thresholds: { good: 10, medium: 50}},
+    'ragweed_pollen': { image: 'assets/Stamps/RagweedPollenStamp.svg', alt: 'State of Ragweed Pollen in the air', thresholds: { good: 10, medium: 50}},
 }
 
 const stampOrder = ['pm2_5', 'dust', 'uv_index', 'nitrogen_dioxide', 'carbon_monoxide', 'alder_pollen', 'birch_pollen', 'grass_pollen', 'mugwort_pollen', 'olive_pollen', 'ragweed_pollen'];
