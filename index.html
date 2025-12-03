@@ -365,11 +365,29 @@
     <button id="btn-close" autofocus>X</button>
     <button id="btn-info" aria-label="Informationen">i</button>
 
+  <!-- Datepicker oben rechts -->
+    <div class="datepicker-container">
+        <input type="date" id="datePicker" class="date-input">
+        <select id="timePicker" class="time-input">
+            <option value="">Uhrzeit wählen</option>
+            <!-- Stunden 00:00 bis 23:00 -->
+        </select>
+    </div>
+
 <div class="postcard-container">
   <div class="postcard-front">
-<img id="postcard-image" src="" alt="">
+    <img id="postcard-image" src="" alt="">
   </div>
+
+<section class="postcard-back">
+    <!-- Grid mit 11 Briefmarken -->
+    <div id="stampsGrid" class="stamps-grid"></div>
+        <!-- Wird dynamisch mit JavaScript gefüllt -->
+</section>
 </div>
+
+
+
 
 <div class="info-overlay" id="info-overlay">
   <div class="info-overlay-inner">
@@ -402,21 +420,7 @@
   </div>
 </div>
 
-<section class="postcard-back">
-    <!-- Datepicker oben rechts -->
-    <div class="datepicker-container">
-        <input type="date" id="datePicker" class="date-input">
-        <select id="timePicker" class="time-input">
-            <option value="">Uhrzeit wählen</option>
-            <!-- Stunden 00:00 bis 23:00 -->
-        </select>
-    </div>
 
-    <!-- Grid mit 11 Briefmarken -->
-    <div id="stampsGrid" class="stamps-grid">
-        <!-- Wird dynamisch mit JavaScript gefüllt -->
-    </div>
-</section>
 </dialog>
 
   <!-- Dialog Ende-->
