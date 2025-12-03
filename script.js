@@ -22,7 +22,7 @@ const stampMapping = {
     'carbon_monoxide': { image: 'assets/Stamps/CarbonMonoxideStamp.svg', alt: 'Carbon Monoxide in grams per cubic meter', thresholds: { good: 1000, medium: 4000}},
     'alder_pollen': { image: 'assets/Stamps/AlderPollenStamp.svg', alt: 'State of Alder Pollen in the air', thresholds: { good: 10, medium: 50}},
     'birch_pollen': { image: 'assets/Stamps/BirchPollenStamp.svg', alt: 'State of Birch Pollen in the air', thresholds: { good: 10, medium: 50}},
-    'grass_pollen': { image: 'assets/Stamps/GrassPollenStamp.svg', alt: ' State of Grass Pollen in the air', thresholds: { good: 10, medium: 50}},
+    'grass_pollen': { image: 'assets/Stamps/GrassPollenStamp.svg', alt: 'State of Grass Pollen in the air', thresholds: { good: 10, medium: 50}},
     'mugwort_pollen': { image: 'assets/Stamps/MugwortPollenStamp.svg', alt: 'State of Mugwort Pollen in the air', thresholds: { good: 10, medium: 50}},
     'olive_pollen': { image: 'assets/Stamps/OlivePollenStamp.svg', alt: 'State of Olive Pollen in the air', thresholds: { good: 10, medium: 50}},
     'ragweed_pollen': { image: 'assets/Stamps/RagweedPollenStamp.svg', alt: 'State of Ragweed Pollen in the air', thresholds: { good: 10, medium: 50}},
