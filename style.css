@@ -54,6 +54,22 @@ main {
   width: 100%;
  }
 
+ /* Pin standardmässig unsichtbar */
+ .pin-label {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none; /* verhindert, dass der Text das Hover blockiert */
+}
+
+#GBern:hover .pin-label,
+#GVancouver:hover .pin-label,
+#GRio:hover .pin-label,
+#GCairo:hover .pin-label,
+#GShanghai:hover .pin-label,
+#GMelbourne:hover .pin-label {
+    opacity: 1;
+}
+
  footer {
   display: flex;
   align-items: center;
@@ -311,6 +327,29 @@ dialog {
   color: #000;           /* oder #fff, je nach SVG-Kontrast */
   text-align: center;
   pointer-events: none;  /* wichtig: Hover/Click geht auf das ganze Bild */
+}
+
+/* Feinanpassungen für einzelne Stamps */
+
+.stamp-image-wrapper.pm2_5 .stamp-value-overlay {
+    top: 62%;   /* weiter nach unten */
+}
+
+.stamp-image-wrapper.uv_index .stamp-value-overlay {
+    top: 78%;
+}
+
+.stamp-image-wrapper.nitrogen_dioxide .stamp-value-overlay {
+    top: 60%;
+}
+
+.stamp-image-wrapper.carbon_monoxide .stamp-value-overlay {
+    left: 57%;  /* weiter nach rechts */
+}
+
+.stamp-image-wrapper.olive_pollen .stamp-value-overlay {
+    top: 35%;   /* weiter nach oben */
+    left: 53%
 }
 
 

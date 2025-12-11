@@ -226,15 +226,10 @@ function displayStamps(data) {
       : '0';
 
     stamp.innerHTML = `
-      <div class="stamp-image-wrapper">
-        <img 
-          src="${config.image}" 
-          alt="${config.alt}" 
-          class="stamp-image"
-        >
-        <div class="stamp-value-overlay">
-          ${value}
-        </div>
+      <div class="stamp-image-wrapper ${key}">
+        <img src="${config.image}" alt="${config.alt}" 
+          class="stamp-image" />
+        <div class="stamp-value-overlay">${value}</div>
       </div>
     `;
 
