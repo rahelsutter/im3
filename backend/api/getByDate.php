@@ -10,8 +10,8 @@ header('Content-Type: application/json');
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
-    $date = $_GET['date']; // Format: YYYY-MM-DD
-    $time = $_GET['time']; // Format: HH:00:00
+    $date = $_GET['date'];
+    $time = $_GET['time'];
     $city = $_GET['city'];
 
     // Stunde extrahieren

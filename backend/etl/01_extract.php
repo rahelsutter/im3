@@ -18,15 +18,6 @@ $collection = [
     'melbourne' => fetchWeatherData(37.8136, 144.9631)
 ];
 
-/* echo '<pre>';
-var_dump(fetchWeatherData(46.9481, 7.4474));
-var_dump(fetchWeatherData(30.0444, 31.2357));
-var_dump(fetchWeatherData(49.2827, 123.1207));
-var_dump(fetchWeatherData(22.9068, 43.1729));
-var_dump(fetchWeatherData(31.2304, 121.4737));
-var_dump(fetchWeatherData(37.8136, 144.9631));
-echo '</pre>'; */
-
 return $collection;
 
 ?>

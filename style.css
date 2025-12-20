@@ -116,7 +116,7 @@ dialog {
 .postcard-back {
   max-width: 25vw;
   width: 100%;
-  aspect-ratio: 3 / 2;   /* oder 4 / 3, was dir vom Look her besser gefällt */
+  aspect-ratio: 3 / 2;
 }
 
 .postcard-front {
@@ -127,7 +127,7 @@ dialog {
 .postcard-front img {
   object-fit: cover;
   display: block;
-   width: 100%;
+  width: 100%;
   height: 100%;
 }
 

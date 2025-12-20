@@ -1,13 +1,11 @@
 <?php
 
-// ---- CORS-Freigabe für dein lokales Test-Origin ----
-header("Access-Control-Allow-Origin: http://127.0.0.1:5500"); // oder "*" für „alle“
-header("Access-Control-Allow-Methods: GET, OPTIONS");          // was dein Frontend braucht
-header("Access-Control-Allow-Headers: Content-Type");          // falls nötig
+header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
-// bei Preflight-Anfragen (OPTIONS) sofort antworten
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204); // leer, aber OK
+    http_response_code(204);
     exit;
 }
 
@@ -22,7 +20,7 @@ try {
     $stmt->execute([$city]);
     $values = $stmt->fetch();
 
-    // Todo: Was tun, wenns keine Resultate gibt?
+    // Was tun, wenns keine Resultate gibt?
     print json_encode($values);
 
 } catch (PDOException $e) {

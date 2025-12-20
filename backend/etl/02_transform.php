@@ -21,9 +21,5 @@ foreach($data as $key => $value) {
     ];
 };
 
-/* echo '<pre>';
-print_r($transformed_data);
-echo '</pre>'; */
-
 return $transformed_data; 
 
