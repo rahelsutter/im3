@@ -207,6 +207,51 @@ async function loadLatestData(city) {
     }
 }
 
+function getLevelText(key, value) {
+  const v = parseFloat(value);
+
+  if (key === 'pm2_5') {
+    if (v <= 15) return ['Unbedenklich 0–15 μg/m³', 'Die Luft ist sauber. Es hat kaum Feinstaubpartikel. Atmen ist unproblematisch für alle.'];
+    if (v <= 25) return ['Mässig 16–25 μg/m³', 'Es gibt etwas Feinstaub in der Luft. Empfindliche Personen sollten vorsichtiger sein.'];
+    return ['Schwer >25 μg/m³', 'Hohe Feinstaubbelastung! Aufenthalte im Freien möglichst vermeiden.'];
+  }
+
+  if (key === 'dust') {
+    if (v <= 15) return ['Unbedenklich 0–15 μg/m³', 'Es ist kaum Staub in der Luft. Die Verschmutzung ist unbedenklich.'];
+    if (v <= 75) return ['Mässig 16–75 μg/m³', 'Die Staubelastung ist im mittleren Bereich. Empfindliche Personen können reagieren.'];
+    return ['Schwer >75 μg/m³', 'Hohe Staubbelastung! Atemwege können gereizt werden, draussen vorsichtig sein.'];
+  }
+
+  if (key === 'carbon_monoxide') {
+    if (v <= 1000) return ['Unbedenklich 0–1000 μg/m³', 'Die Luft ist sicher. Kohlenmonoxid liegt weit unter gesundheitsschädlichen Werten.'];
+    if (v <= 4000) return ['Mässig 1001–4000 μg/m³', 'Kohlenmonoxid ist erhöht. Empfindliche Personen sollten Belastungen reduzieren.'];
+    return ['Schwer >4000 μg/m³', 'Achtung! Hoher CO‑Gehalt. Längere Einwirkung kann gefährlich sein.'];
+  }
+
+  if (key === 'nitrogen_dioxide') {
+    if (v <= 25) return ['Unbedenklich 0–25 μg/m³', 'Die Luft ist sehr sauber. Kaum Verkehrsschadstoffe, Atmen ohne Sorgen.'];
+    if (v <= 50) return ['Mässig 26–50 μg/m³', 'Leichte Belastung, z. B. nahe an Strassen. Empfindliche Personen sollten aufpassen.'];
+    return ['Schwer >50 μg/m³', 'Hohe Konzentration! Belastend für die Atemwege, Aufenthalt draussen möglichst vermeiden.'];
+  }
+
+  if (key === 'uv_index') {
+    if (v <= 2) return ['Unbedenklich 0–2', 'Sonnenstrahlung ist gering. Kaum Sonnenbrandgefahr.'];
+    if (v <= 7) return ['Mässig 3–7', 'Mittlere Strahlung. Schatten und Sonnenschutz werden empfohlen.'];
+    return ['Schwer >8', 'Sehr starke Strahlung! Hohe Sonnenbrandgefahr, Schutz dringend nötig.'];
+  }
+
+  // Pollen (Alder, Birch, Grass, Mugwort, Olive, Ragweed)
+  const pollenKeys = ['alder_pollen', 'birch_pollen', 'grass_pollen', 'mugwort_pollen', 'olive_pollen', 'ragweed_pollen'];
+  if (pollenKeys.includes(key)) {
+    if (v <= 10) return ['Unbedenklich 0–10 grains/m³', 'Die Pollenbelastung ist niedrig. Allergiker haben meist kaum Symptome.'];
+    if (v <= 50) return ['Mässig 11–50 grains/m³', 'Leichte Pollenbelastung. Empfindliche Personen können Niesen oder juckende Augen bemerken.'];
+    return ['Schwer >50 grains/m³', 'Hohe Pollenbelastung! Starke Symptome möglich, Schutzmassnahmen empfohlen.'];
+  }
+
+  return ['Keine Einstufung', 'Für diesen Wert ist noch kein Text definiert.'];
+}
+
+
 // Briefmarken anzeigen
 function displayStamps(data) {
   stampsGrid.innerHTML = '';
@@ -220,18 +265,21 @@ function displayStamps(data) {
     stamp.className = 'stamp';
     
     // erklärt, was angezeigt werden soll (wie viel Kommastellen & was wenn kein Wert gefunden werden kann)
-    const rawValue = data[key];
-    const value = rawValue !== null && rawValue !== undefined
-      ? parseFloat(rawValue).toFixed(2)
-      : '0';
+const rawValue = data[key];
+const value = rawValue !== null && rawValue !== undefined ? parseFloat(rawValue).toFixed(2) : '0';
+const [levelTitle, levelText] = getLevelText(key, value);
 
-    stamp.innerHTML = `
-      <div class="stamp-image-wrapper ${key}">
-        <img src="${config.image}" alt="${config.alt}" 
-          class="stamp-image" />
-        <div class="stamp-value-overlay">${value}</div>
-      </div>
-    `;
+stamp.innerHTML = `
+  <div class="stamp-image-wrapper ${key}">
+    <img src="${config.image}" alt="${config.alt}" class="stamp-image" />
+    <div class="stamp-value-overlay">${value}</div>
+    <div class="stamp-tooltip">
+      <strong>${levelTitle}</strong>
+      <p>${levelText}</p>
+    </div>
+  </div>
+`;
+
 
     stampsGrid.appendChild(stamp);
   });
