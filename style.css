@@ -396,4 +396,43 @@ dialog {
     justify-content: center;
 }
 
+/* Tooltip-Grundstil: kein schwarzer Rahmen */
+.stamp-tooltip {
+  border: none;
+}
 
+/* Unbedenklich */
+.level-unbedenklich {
+  background-color: #B6C7B4;
+  color: #000000;
+}
+.level-unbedenklich strong {
+  color: #000000;
+}
+.level-unbedenklich p {
+  color: #000000;
+}
+
+/* Mässig */
+.level-maessig {
+  background-color: #E3C5B9;
+  color: #000000;
+}
+.level-maessig strong {
+  color: #000000;
+}
+.level-maessig p {
+  color: #000000;
+}
+
+/* Schwer */
+.level-schwer {
+  background-color: #C89DAB;
+  color: #000000;
+}
+.level-schwer strong {
+  color: #000000;
+}
+.level-schwer p {
+  color: #000000;
+}
