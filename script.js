@@ -1,19 +1,5 @@
 let currentCity = '';
 
-/*const stampMapping = {
-    'pm2_5': { name: 'Particulate Matter', unit: 'µg/m³', description: 'sind winzige Feinstaubpartikel in der Luft, die tief in die Lunge gelangen können.' },
-    'dust': { name: 'Dust', unit: 'µg/m³', description: 'sind größere Partikel in der Luft, die Nase, Hals und Lunge reizen können.' },
-    'uv_index': { name: 'UV Index', unit: '', description: 'zeigt die Stärke der Sonnenstrahlung an und sagt, wie schnell man einen Sonnenbrand bekommen kann.' },
-    'nitrogen_dioxide': { name: 'Nitrogen Dioxide', unit: 'µg/m³', description: 'ist ein Gas aus Autoabgasen und Industrie, das Atemwege reizen kann.' },
-    'carbon_monoxide': { name: 'Carbon Monoxide', unit: 'µg/m³', description: 'ist ein geruchloses Gas, das durch Verkehr und Verbrennung entsteht und die Sauerstoffaufnahme im Körper stören kann.' },
-    'alder_pollen': { name: 'Alder Pollen', unit: 'Pollen', description: 'sind Blütenstaub der Erle, der bei Allergikern Niesen, juckende Augen oder Schnupfen auslösen kann.' },
-    'birch_pollen': { name: 'Birch Pollen', unit: 'Pollen', description: 'sind Blütenstaub von Birken und gehören zu den stärksten Pollenallergenen im Frühling.' },
-    'grass_pollen': { name: 'Grass Pollen', unit: 'Pollen', description: 'sind Blütenstaub von Gräsern und können bei Allergikern Heuschnupfen auslösen.' },
-    'mugwort_pollen': { name: 'Mugwort Pollen', unit: 'Pollen', description: 'sind der Blütenstaub des Beifußes und können bei Allergikern Niesen, juckende Augen, Schnupfen, Husten oder Atembeschwerden verursachen.' },
-    'olive_pollen': { name: 'Olive Pollen', unit: 'Pollen', description: 'sind der Blütenstaub von Olivenbäumen und können bei Allergikern allergische Reaktionen auslösen.' },
-    'ragweed_pollen': { name: 'Ragweed Pollen', unit: 'Pollen', description: 'sind der Blütenstaub der Ambrosia-Pflanze und gehören zu den stärksten Allergieauslösern im Spätsommer.' }
-};*/
-
 const stampMapping = {
    'pm2_5': { image: 'assets/Stamps/ParticulateMatterStamp.svg', alt: 'Particulate Matter in grams per cubic meter', thresholds: { good: 15, medium: 25 }},
     'dust': { image: 'assets/Stamps/DustStamp.svg', alt: 'Dust in grams per cubic meter', thresholds: { good: 15, medium: 75}},
@@ -42,11 +28,12 @@ const cityMapping = {
 const stampsGrid = document.getElementById('stampsGrid');
 const datePicker = document.getElementById('datePicker');
 const timePicker = document.getElementById('timePicker');
+const stampInfoBox = document.getElementById('stamp-info-box');
 
 async function getAll() {
     const url = 'https://im3.uv-index-usa.com/backend/api/getAll.php';
 try {
-    const response = await fetch(url); //-> await: code muss warten bis API zurück kommt?
+    const response = await fetch(url); //-> await: Code muss warten bis API zurück kommt?
     const data = await response.json();
     console.log(data); // gibt die Daten der API in der Konsole aus
 } catch (error) {
@@ -67,13 +54,6 @@ try {
     }
 }
 
-/*
-const datepicker = document.querySelector('#datepicker');
-datepicker.addEventListener('change', function() {
-    const date = datepicker.value;
-    console.log(date);
-})*/
-
 const Pin_Bern = document.querySelector('#Pin_Bern');
 const Pin_Cairo = document.querySelector('#Pin_Cairo');
 const Pin_Vancouver = document.querySelector('#Pin_Vancouver');
@@ -84,6 +64,7 @@ const Pin_Melbourne = document.querySelector('#Pin_Melbourne');
 const dialog = document.querySelector('#dialog');
 const postcardImg = document.querySelector('#postcard-image');
 const btn_close = document.querySelector('#btn-close');
+const worldWrapper = document.querySelector('.world-wrapper'); // HIER
 
 async function openPostcard(city, imagePath) {
     currentCity = city; // Stadt speichern
@@ -250,9 +231,6 @@ function getLevelText(key, value) {
   return ['unbedenklich','Keine Einstufung','Für diesen Wert ist noch kein Text definiert.'];
 }
 
-
-
-
 // Briefmarken anzeigen
 function displayStamps(data) {
   stampsGrid.innerHTML = '';
@@ -263,30 +241,52 @@ function displayStamps(data) {
     if (!config) return;
 
     const stamp = document.createElement('div');
-    stamp.className = 'stamp';
+    stamp.className = `stamp stamp-${key}`;
     
-    // erklärt, was angezeigt werden soll (wie viel Kommastellen & was wenn kein Wert gefunden werden kann)
+// erklärt, was angezeigt werden soll (wie viel Kommastellen & was wenn kein Wert gefunden werden kann)
 const rawValue = data[key];
-const value = rawValue !== null && rawValue !== undefined ? parseFloat(rawValue).toFixed(2) : '0';
+const value =
+  rawValue !== null && rawValue !== undefined
+    ? parseFloat(rawValue).toFixed(2)
+    : '0';
+
 const [levelId, levelTitle, levelText] = getLevelText(key, value);
 
 stamp.innerHTML = `
   <div class="stamp-image-wrapper ${key}">
-    <img src="${config.image}" alt="${config.alt}" class="stamp-image" />
+    <img src="${config.image}" alt="${config.alt}" class="stamp-image">
     <div class="stamp-value-overlay">${value}</div>
-    <div class="stamp-tooltip level-${levelId}">
-      <strong>${levelTitle}</strong>
-      <p>${levelText}</p>
-    </div>
   </div>
 `;
 
+stamp.addEventListener('mouseenter', () => {
+  if (!stampInfoBox) return;
+
+  stampInfoBox.classList.remove('level-unbedenklich','level-maessig','level-schwer');
+  if (levelId === 'unbedenklich') stampInfoBox.classList.add('level-unbedenklich');
+  if (levelId === 'maessig')      stampInfoBox.classList.add('level-maessig');
+  if (levelId === 'schwer')       stampInfoBox.classList.add('level-schwer');
+
+  stampInfoBox.innerHTML = `
+    <strong>${levelTitle}</strong>
+    <p>${levelText}</p>
+  `;
+});
+
+stamp.addEventListener('mouseleave', () => {
+  if (!stampInfoBox) return;
+  stampInfoBox.classList.remove('level-maessig','level-schwer');
+  stampInfoBox.classList.add('level-unbedenklich');
+  stampInfoBox.innerHTML = `
+    <strong>Fahre mit der Maus über eine Briefmarke.</strong>
+    <p>Hier erscheint dann die Erklärung zum Wert.</p>
+  `;
+});
 
 
     stampsGrid.appendChild(stamp);
   });
 }
-
 
 // Loading State
 function showLoading() {

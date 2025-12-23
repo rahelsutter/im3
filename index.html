@@ -360,12 +360,15 @@
 <!-- Ende SVG Weltkarte-->
     </section>
 
+  <dialog id="postcardDialog">
+    <div class="postcard-container">...</div>
+  </dialog>
+</main>
+
   <!-- Dialog Start (Pop-up)-->
   <dialog id="dialog">
     <button id="btn-close" autofocus>X</button>
     <button id="btn-info" aria-label="Informationen">i</button>
-
- 
 
 <div class="postcard-container">
   <section class="postcard-front">
@@ -384,43 +387,33 @@
     <!-- Grid mit 11 Briefmarken -->
     <div id="stampsGrid" class="stamps-grid"></div>
         <!-- Wird dynamisch mit JavaScript gefüllt -->
+         <div id="stamp-info-box"
+     class="stamp-info-box level-unbedenklich">
+  <strong>Fahre mit der Maus über eine Briefmarke.</strong>
+  <p>Hier erscheint dann die Erklärung zum Wert.</p>
+</div>
 </section>
 </div>
-
-
-
 
 <div class="info-overlay" id="info-overlay">
   <div class="info-overlay-inner">
     <button class="info-close" id="info-close">X</button>
 
     <div class="info-scroll">
-      <p><strong>Particulate Matter (Feinstaub)</strong><br>
-      sind winzige Feinstaubpartikel in der Luft, die tief in die Lunge gelangen können.</p>
-      <p><strong>Dust (Staub)</strong><br>
-      sind größere Partikel in der Luft, die Nase, Hals und Lunge reizen können.</p>
-      <p><strong>UV Index (Ultraviolette Strahlung)</strong><br>
-      zeigt die Stärke der Sonnenstrahlung an und sagt, wie schnell man einen Sonnenbrand bekommen kann.</p>
-      <p><strong>Nitrogen Dioxide (Stickstoffdioxid)</strong><br>
-      ist ein Gas aus Autoabgasen und Industrie, das Atemwege reizen kann.</p>
-      <p><strong>Carbon Monoxide (Kohlenmonoxid)</strong><br>
-      ist ein geruchloses Gas, das durch Verkehr und Verbrennung entsteht und die Sauerstoffaufnahme im Körper stören kann.</p>
-      <p><strong>Alder Pollen (Erle-Pollen)</strong><br>
-      sind Blütenstaub der Erle, der bei Allergikern Niesen, juckende Augen oder Schnupfen auslösen kann.</p>
-      <p><strong>Birch Pollen (Birken-Pollen)</strong><br>
-      sind Blütenstaub von Birken und gehören zu den stärksten Pollenallergenen im Frühling.</p>
-      <p><strong>Mugwort Pollen (Beifuß-Pollen)</strong><br>
-      sind der Blütenstaub des Beifußes und können bei Allergikern Niesen, juckende Augen, Schnupfen, Husten oder Atembeschwerden auslösen.</p>
-      <p><strong>Olive Pollen (Olivenbaum-Pollen)</strong><br>
-      sind der Blütenstaub von Olivenbäumen, stark allergen und können z. B. Niesen und juckende Augen verursachen.</p>
-      <p><strong>Grass Pollen (Gräser-Pollen)</strong><br>
-      sind der Blütenstaub von Gräsern und können Niesen, juckende oder tränende Augen, Schnupfen und Husten verursachen.</p>
-      <p><strong>Ragweed Pollen (Ambrosia-Pollen)</strong><br>
-      sind der Blütenstaub von Ambrosia, stark allergen und können Niesen sowie juckende oder tränende Augen auslösen.</p>
+      <p><strong>Particulate Matter (Feinstaub)</strong>sind winzige Feinstaubpartikel in der Luft, die tief in die Lunge gelangen können.</p>
+      <p><strong>Dust (Staub)</strong>sind größere Partikel in der Luft, die Nase, Hals und Lunge reizen können.</p>
+      <p><strong>UV Index (Ultraviolette Strahlung)</strong>zeigt die Stärke der Sonnenstrahlung an und sagt, wie schnell man einen Sonnenbrand bekommen kann.</p>
+      <p><strong>Nitrogen Dioxide (Stickstoffdioxid)</strong>ist ein Gas aus Autoabgasen und Industrie, das Atemwege reizen kann.</p>
+      <p><strong>Carbon Monoxide (Kohlenmonoxid)</strong>ist ein geruchloses Gas, das durch Verkehr und Verbrennung entsteht und die Sauerstoffaufnahme im Körper stören kann.</p>
+      <p><strong>Alder Pollen (Erle-Pollen)</strong>sind Blütenstaub der Erle, der bei Allergikern Niesen, juckende Augen oder Schnupfen auslösen kann.</p>
+      <p><strong>Birch Pollen (Birken-Pollen)</strong>sind Blütenstaub von Birken und gehören zu den stärksten Pollenallergenen im Frühling.</p>
+      <p><strong>Mugwort Pollen (Beifuß-Pollen)</strong>sind der Blütenstaub des Beifußes und können bei Allergikern Niesen, juckende Augen, Schnupfen, Husten oder Atembeschwerden auslösen.</p>
+      <p><strong>Olive Pollen (Olivenbaum-Pollen)</strong>sind der Blütenstaub von Olivenbäumen, stark allergen und können z. B. Niesen und juckende Augen verursachen.</p>
+      <p><strong>Grass Pollen (Gräser-Pollen)</strong>sind der Blütenstaub von Gräsern und können Niesen, juckende oder tränende Augen, Schnupfen und Husten verursachen.</p>
+      <p><strong>Ragweed Pollen (Ambrosia-Pollen)</strong>sind der Blütenstaub von Ambrosia, stark allergen und können Niesen sowie juckende oder tränende Augen auslösen.</p>
     </div>
   </div>
 </div>
-
 
 </dialog>
   <!-- Dialog Ende-->
