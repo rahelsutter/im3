@@ -127,7 +127,11 @@ dialog {
 
 .postcard-back {
   background: var(--beige);
-  display: block; /* oder flex, je nach Inhalt */
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px;   /* vorher 52px 32px 32px über den Container */
+  transform: scale(0.89);   /* alles innen etwas kleiner */
+  transform-origin: center;
 }
 
 .postcard-front img {
@@ -312,7 +316,8 @@ dialog {
 .stamp-info-box {
   grid-column: 2 / 4;
   grid-row: 2;
-  margin-top: -95px;    /* z.B. -20px nach oben schieben */
+  margin-top: -120px;   /* vorher -95px */
+  margin-right: -195px;  /* leicht nach links, bei Bedarf */
 }
 
 .stamp-value {
