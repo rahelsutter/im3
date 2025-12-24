@@ -123,15 +123,17 @@ dialog {
 .postcard-front {
   display: grid;
   place-items: center;
+  flex: 0 0 25vw;   /* behält bisherige Breite */
 }
 
 .postcard-back {
   background: var(--beige);
   display: flex;
   flex-direction: column;
-  padding: 20px 18px;   /* vorher 52px 32px 32px über den Container */
-  transform: scale(0.89);   /* alles innen etwas kleiner */
+  padding: 16px 20px;
+  transform: scale(0.89);
   transform-origin: center;
+  flex: 0 0 26vw;   /* hier machst du sie etwas breiter */
 }
 
 .postcard-front img {
