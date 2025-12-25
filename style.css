@@ -280,6 +280,17 @@ dialog {
     min-width: 100px;
 }
 
+.date-input.placeholder,
+.time-input.placeholder {
+  color: #000;              /* wie normaler Text */
+  letter-spacing: 0.06em;
+}
+
+.date-input::placeholder {
+  color: transparent;       /* nativen Platzhalter verstecken */
+}
+
+
 /* Briefmarken Grid */
 .stamps-grid {
   display: grid;

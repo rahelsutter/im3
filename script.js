@@ -30,6 +30,14 @@ const datePicker = document.getElementById('datePicker');
 const timePicker = document.getElementById('timePicker');
 const stampInfoBox = document.getElementById('stamp-info-box');
 
+function resetPickersUI() {
+  datePicker.value = '';
+  timePicker.value = '';
+
+  datePicker.classList.add('placeholder');
+  timePicker.classList.add('placeholder');
+}
+
 async function getAll() {
     const url = 'https://im3.uv-index-usa.com/backend/api/getAll.php';
 try {
@@ -79,6 +87,7 @@ async function openPostcard(city, imagePath) {
     // Datepicker zurücksetzen
     datePicker.value = '';
     timePicker.value = '';
+    resetPickersUI();       
     
     // Neueste Daten laden
     await loadLatestData(city);
@@ -299,8 +308,15 @@ function showError(message) {
 }
 
 // Datepicker Event Listeners
-datePicker.addEventListener('change', checkAndLoadData);
-timePicker.addEventListener('change', checkAndLoadData);
+datePicker.addEventListener('change', () => {
+  datePicker.classList.remove('placeholder');
+  checkAndLoadData();
+});
+
+timePicker.addEventListener('change', () => {
+  timePicker.classList.remove('placeholder');
+  checkAndLoadData();
+});
 
 async function checkAndLoadData() {
     const date = datePicker.value;
