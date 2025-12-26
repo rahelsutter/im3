@@ -300,7 +300,7 @@ dialog {
 
 /* Einzelne Briefmarke */
 .stamp {
-    transform: scale(0.75);  /* ← hier einfügen, 0.6-0.8 testen */
+    transform: scale(0.75);
     position: relative;
     aspect-ratio: 1;
     display: flex;
