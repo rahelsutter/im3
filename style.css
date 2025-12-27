@@ -73,8 +73,7 @@ main {
 dialog {
     position: absolute;
     width: 85vw;
-    height: 85vh;
-    aspect-ratio: 16 / 9;   
+    height: 85vh;  
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -140,15 +139,15 @@ dialog {
 
 .postcard-front,
 .postcard-back {
-  width: 30vw;
-  max-width: 36rem;
-  aspect-ratio: 3 / 2;
+width: 46vh;
+height: 69vh;
   }
 /*---------------------------------------Postkarte Voderseite-------------------------------------------*/
 .postcard-front {
   display: grid;
   place-items: center;
   position: relative;
+  transform: translateY(-1vh); 
 }
 
 .postcard-front img {
@@ -224,11 +223,12 @@ dialog {
 /*---------------------------------------Postkarte Rückseite-------------------------------------------*/
 
 .postcard-back {
- background: var(--beige);
- display: grid;
- grid-template-columns: repeat(3, 1fr);
- grid-template-rows: 0.6fr repeat(5, 1fr);
- padding: 16px 24px;
+  background: var(--beige);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* statt repeat(3, 1fr) */
+  grid-template-rows: 0.6fr repeat(5, 1fr);
+  padding: 1.5vh 2vw;
+  transform: translateY(1vh);
 }
 
 /* Datepicker Container */
@@ -269,10 +269,10 @@ dialog {
 
 /* Einzelne Briefmarke */
 .stamp {
-    width: 85%;
-    height: 85%;
-    max-width: 9rem;
-    max-height: 9rem;
+    width: 88%;
+    height: 88%;
+    max-width: 9.5rem;
+    max-height: 9.5rem;
     position: relative;
     /*aspect-ratio: 1;*/
     display: flex;
