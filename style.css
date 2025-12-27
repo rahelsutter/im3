@@ -101,40 +101,6 @@ dialog {
     border: none;
 }
 
-.postcard-container {
-  display: flex;
-  align-items: center;      
-  justify-content: center;  
-  gap: 10px;               
-  width: 100%;
-  height: 100%;     
- /* padding: 52px 32px 32px; */
-}
-
-.postcard-front,
-.postcard-back {
-  width: 26vw;
-  max-width: 32%;
-  aspect-ratio: 3 / 2;
-}
-
-/* nur Layout, nicht Größe */
-.postcard-front {
-  display: grid;
-  place-items: center;
-}
-
-.postcard-back {
-  background: var(--beige);
-  display: grid;
-}
-
-.postcard-front img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
 #btn-close {
   position: absolute;
   top: 12px;
@@ -181,6 +147,45 @@ dialog {
   transform: scale(1.05);
   transition: all 0.15s ease;
 }
+
+.postcard-container {
+  display: flex;
+  align-items: center;      
+  justify-content: center;  
+  gap: 10px;               
+  width: 100%;
+  height: 100%;     
+ /* padding: 52px 32px 32px; */
+}
+
+.postcard-front,
+.postcard-back {
+  width: 26vw;
+  max-width: 32%;
+  aspect-ratio: 3 / 2;
+}
+
+/* nur Layout, nicht Größe */
+.postcard-front {
+  display: grid;
+  place-items: center;
+}
+
+.postcard-front img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.postcard-back {
+  background: var(--beige);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Spalten */
+  grid-template-rows: repeat(5, 1fr);    /* 5 Zeilen */
+  gap: 0;
+  padding: 12px 18px;
+}
+
 
 .info-overlay {
   position: absolute;
@@ -254,8 +259,9 @@ dialog {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-  padding: 10px 20px 0 20px; /* oben + rechts etwas Rand */
-  position: static;          /* Wichtig: kein absolute mehr */
+ padding: 0 10px;
+ grid-column: 2 / 4; /* Spalte 2–3 */
+ grid-row: 1;        /* Zeile 1 */
 }
 
 .date-input, .time-input {
@@ -282,14 +288,6 @@ dialog {
   color: transparent;       /* nativen Platzhalter verstecken */
 }
 
-
-/* Briefmarken Grid */
-.stamps-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 0px;   /* oder 4px, je nach Gefühl */
-}
 
 /* Einzelne Briefmarke */
 .stamp {
@@ -318,13 +316,15 @@ dialog {
 .stamp-mugwort_pollen { grid-column: 3; grid-row: 3; }
 .stamp-ragweed_pollen { grid-column: 3; grid-row: 4; }
 
-/* Textbox in der Mitte über zwei Spalten */
+/* 
+Textbox in der Mitte über zwei Spalten 
 .stamp-info-box {
   grid-column: 2 / 4;
   grid-row: 2;
-  margin-top: -120px;   /* vorher -95px */
-  margin-right: -195px;  /* leicht nach links, bei Bedarf */
+  margin-top: -120px;  
+  margin-right: -195px;  
 }
+*/
 
 .stamp-value {
     font-size: 20px;
@@ -431,11 +431,28 @@ dialog {
   border: none;
 }
 
-/* Positionierung Werte Start */
+/* Positionierung Werte Start 
 .stamp-info-box {
-  position: absolute;      /* damit es immer am gleichen Ort bleibt */
-  top: 300px;              /* anpassen, bis es wie im Screenshot sitzt */
-  right: 220px;             /* oder left, je nach Layout */
+  position: absolute;      
+  top: 300px;             
+  right: 220px;            
+  width: 200px;
+  min-height: 80px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.6rem;
+  line-height: 1.4;
+  box-sizing: border-box;
+} 
+*/
+
+.stamp-info-box {
+  grid-column: 2 / 4;  /* Spalte 2–3 */
+  grid-row: 3;         /* Zeile 3 */
+  align-self: center;
+  justify-self: center;
   width: 200px;
   min-height: 80px;
   padding: 12px 14px;
@@ -446,6 +463,8 @@ dialog {
   line-height: 1.4;
   box-sizing: border-box;
 }
+
+
 
 /* Texte innerhalb der Box */
 .stamp-info-box strong {

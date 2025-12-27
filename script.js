@@ -25,7 +25,7 @@ const cityMapping = {
     'Melbourne': 'Melbourne'
 };
 
-const stampsGrid = document.getElementById('.postcard-back');
+const stampsGrid = document.querySelector('.postcard-back');
 const datePicker = document.getElementById('datePicker');
 const timePicker = document.getElementById('timePicker');
 const stampInfoBox = document.getElementById('stamp-info-box');
