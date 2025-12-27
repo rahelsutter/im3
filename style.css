@@ -78,7 +78,7 @@ main {
 dialog {
     position: absolute;
     width: 85vw;
-    max-width: 1200px;
+    height: 85vh;
     aspect-ratio: 16 / 9;   
     left: 50%;
     top: 50%;
@@ -141,20 +141,21 @@ dialog {
   gap: 10px;               
   width: 100%;
   height: 100%;     
- /* padding: 52px 32px 32px; */
 }
 
 .postcard-front,
 .postcard-back {
   width: 26vw;
-  max-width: 32%;
+  max-width: 32rem;
   aspect-ratio: 3 / 2;
-}
-
+  box-sizing: border-box;
+ 
+  }
 /*---------------------------------------Postkarte Voderseite-------------------------------------------*/
 .postcard-front {
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 
 .postcard-front img {
@@ -234,9 +235,8 @@ dialog {
   background: var(--beige);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 0.6fr repeat(5, 1fr);  
-  gap: 0;
-  padding: 12px 18px;
+ grid-template-rows: 0.6fr repeat(5, 1fr);
+ padding: 16px 24px;
 }
 
 /* Datepicker Container */
@@ -248,6 +248,7 @@ dialog {
  grid-column: 2 / 4;   /* Spalte 2–3 */
  grid-row: 1;          /* Zeile 1 */
  z-index: 2;
+ padding: 10px 0px 20px 0px
 }
 
 .date-input, .time-input {
@@ -261,7 +262,7 @@ dialog {
 }
 
 .time-input {
-    min-width: 100px;
+    min-width: 80px;
 }
 
 .date-input.placeholder,
@@ -277,9 +278,12 @@ dialog {
 
 /* Einzelne Briefmarke */
 .stamp {
-    transform: scale(0.75);
+    width: 85%;
+    height: 85%;
+    max-width: 9rem;
+    max-height: 9rem;
     position: relative;
-    aspect-ratio: 1;
+    /*aspect-ratio: 1;*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -313,9 +317,9 @@ dialog {
 }
 
 .stamp-image-wrapper {
-  position: relative;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .stamp-image {
@@ -341,7 +345,7 @@ dialog {
 /* Feinanpassungen für einzelne Stamps */
 
 .stamp-image-wrapper.pm2_5 .stamp-value-overlay {
-    top: 62%;   /* weiter nach unten */
+    top: 62%;   
 }
 
 .stamp-image-wrapper.uv_index .stamp-value-overlay {
@@ -353,11 +357,11 @@ dialog {
 }
 
 .stamp-image-wrapper.carbon_monoxide .stamp-value-overlay {
-    left: 57%;  /* weiter nach rechts */
+    left: 57%;  
 }
 
 .stamp-image-wrapper.olive_pollen .stamp-value-overlay {
-    top: 35%;   /* weiter nach oben */
+    top: 35%;   
     left: 53%;
 }
 
