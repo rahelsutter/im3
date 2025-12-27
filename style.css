@@ -92,7 +92,8 @@ main {
 dialog {
     position: absolute;
     width: 85vw;
-    height: 85vh;
+    max-width: 1200px;
+    aspect-ratio: 16 / 9;   
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -102,22 +103,18 @@ dialog {
 
 .postcard-container {
   display: flex;
-  position: relative;
   align-items: center;      
   justify-content: center;  
   gap: 10px;               
   width: 100%;
-  height: 100%;
-  background: var(--orange);     
+  height: 100%;     
  /* padding: 52px 32px 32px; */
 }
 
 .postcard-front,
 .postcard-back {
-  width: 25vw; 
-  height: calc(25vw * 2 / 3);
-  max-width: 25vw; 
-  max-height: calc(25vw * 2 / 3);
+  width: 26vw;
+  max-width: 32%;
   aspect-ratio: 3 / 2;
 }
 
@@ -129,8 +126,7 @@ dialog {
 
 .postcard-back {
   background: var(--beige);
-  display: flex;
-  flex-direction: column;;
+  display: grid;
 }
 
 .postcard-front img {
@@ -291,6 +287,7 @@ dialog {
 .stamps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: 0px;   /* oder 4px, je nach Gefühl */
 }
 
