@@ -54,7 +54,7 @@ main {
   width: 100%;
  }
 
- /* Pin standardmässig unsichtbar */
+ /* Ortsname standardmässig unsichtbar */
  .pin-label {
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -69,20 +69,6 @@ main {
 #GMelbourne:hover .pin-label {
     opacity: 1;
 }
-
- footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  background: var(--blue);
-  padding-right: 3rem;
-  margin-left: 5rem;
-  height: 100%;
- }
-
- footer p {
-  color: grey; 
- }
 
 #Pin_Vancouver, #Pin_Bern, #Pin_Melbourne, #Pin_Shanghai, #Pin_Cairo, #Pin_RiodeJaneiro {
     cursor: pointer;
@@ -372,7 +358,7 @@ dialog {
 
 .stamp-image-wrapper.olive_pollen .stamp-value-overlay {
     top: 35%;   /* weiter nach oben */
-    left: 53%
+    left: 53%;
 }
 
 
@@ -440,7 +426,6 @@ dialog {
   margin-right: -195px; */
 
 
-
 /* Texte innerhalb der Box */
 .stamp-info-box strong {
   display: block;
@@ -486,4 +471,19 @@ dialog {
 .level-schwer p {
   color: #000000;
 }
+
+ footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--blue);
+  padding-right: 3rem;
+  margin-left: 5rem;
+  height: 100%;
+ }
+
+ footer p {
+  color: grey; 
+ }
+
 
