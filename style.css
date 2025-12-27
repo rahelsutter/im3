@@ -149,13 +149,11 @@ dialog {
   max-width: 32rem;
   aspect-ratio: 3 / 2;
   box-sizing: border-box;
- 
   }
 /*---------------------------------------Postkarte Voderseite-------------------------------------------*/
 .postcard-front {
   display: grid;
   place-items: center;
-  overflow: hidden;
 }
 
 .postcard-front img {
@@ -232,9 +230,9 @@ dialog {
 /*---------------------------------------Postkarte Rückseite-------------------------------------------*/
 
 .postcard-back {
-  background: var(--beige);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+ background: var(--beige);
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
  grid-template-rows: 0.6fr repeat(5, 1fr);
  padding: 16px 24px;
 }
@@ -244,11 +242,10 @@ dialog {
  display: flex;
  justify-content: flex-end;
  gap: 8px;
- padding: 0 10px;
  grid-column: 2 / 4;   /* Spalte 2–3 */
  grid-row: 1;          /* Zeile 1 */
  z-index: 2;
- padding: 10px 0px 20px 0px
+ padding: 10px 10px 20px 10px
 }
 
 .date-input, .time-input {
@@ -426,9 +423,6 @@ dialog {
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
   box-sizing: border-box;
 }
-  /*margin-top: -120px;  
-  margin-right: -195px; */
-
 
 /* Texte innerhalb der Box */
 .stamp-info-box strong {
