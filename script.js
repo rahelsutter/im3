@@ -242,7 +242,10 @@ function getLevelText(key, value) {
 
 // Briefmarken anzeigen
 function displayStamps(data) {
-  stampsGrid.innerHTML = '';
+
+  const oldStamps = stampsGrid.querySelectorAll('.stamp');
+  oldStamps.forEach(s => s.remove());
+
   stampsGrid.classList.remove('loading');
   
   stampOrder.forEach(key => {
@@ -299,12 +302,22 @@ stamp.addEventListener('mouseleave', () => {
 
 // Loading State
 function showLoading() {
-    stampsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">Lade Daten...</p>';
+  if (!stampInfoBox) return;
+  stampInfoBox.className = 'stamp-info-box';
+  stampInfoBox.innerHTML = `
+    <strong>Lade Daten...</strong>
+    <p>Bitte einen Moment warten.</p>
+  `;
 }
 
 // Error State
 function showError(message) {
-    stampsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #C26E4B;">${message}</p>`;
+  if (!stampInfoBox) return;
+  stampInfoBox.className = 'stamp-info-box level-schwer';
+  stampInfoBox.innerHTML = `
+    <strong>Fehler</strong>
+    <p>${message}</p>
+  `;
 }
 
 // Datepicker Event Listeners
