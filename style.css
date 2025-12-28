@@ -474,6 +474,15 @@ height: 69vh;
     object-fit: contain;
   }
 
+    .pin-label {
+    opacity: 1;          /* immer sichtbar */
+    pointer-events: none;
+  }
+
+  .pin-group:hover .pin-label {
+    opacity: 1;          /* Hover ändert nichts mehr */
+  }
+
   /* Karten übereinander statt nebeneinander */
   .postcard-container {
     flex-direction: column;            
