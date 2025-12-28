@@ -32,6 +32,16 @@ const datePicker = document.getElementById('datePicker');
 const timePicker = document.getElementById('timePicker');
 const stampInfoBox = document.getElementById('stamp-info-box');
 
+function setDefaultInfoBox() {
+  if (!stampInfoBox) return;
+  stampInfoBox.className = 'stamp-info-box level-unbedenklich';
+  stampInfoBox.innerHTML = `
+    <strong>Fahre mit der Maus über eine Briefmarke.</strong>
+    <p>Hier erscheint dann die Einschätzung zum Wert.</p>
+  `;
+}
+
+
 function resetPickersUI() {
   datePicker.value = '';
   timePicker.value = '';
@@ -303,7 +313,6 @@ function getLevelText(key, value) {
 }
 
 // Briefmarken anzeigen
-// Briefmarken anzeigen
 function displayStamps(data) {
   const oldStamps = stampsGrid.querySelectorAll('.stamp');
   oldStamps.forEach(s => s.remove());
@@ -313,6 +322,9 @@ function displayStamps(data) {
   hasErrorState = false;
   datePicker.classList.remove('error');
   timePicker.classList.remove('error');
+
+  // NEU: Standardtext setzen (grüne Box mit Hinweis)
+  setDefaultInfoBox();
 
   stampOrder.forEach(key => {
     const config = stampMapping[key];
@@ -332,7 +344,7 @@ function displayStamps(data) {
       </div>
     `;
 
-    // Hover: nur aktiv, wenn KEIN Fehlerzustand
+    // Hover nur, wenn KEIN Fehlerzustand
     stamp.addEventListener('mouseenter', () => {
       if (!stampInfoBox || hasErrorState) return;
 
@@ -350,18 +362,14 @@ function displayStamps(data) {
 
     stamp.addEventListener('mouseleave', () => {
       if (!stampInfoBox || hasErrorState) return;
-
-      stampInfoBox.classList.remove('level-maessig','level-schwer');
-      stampInfoBox.classList.add('level-unbedenklich');
-      stampInfoBox.innerHTML = `
-        <strong>Fahre mit der Maus über eine Briefmarke.</strong>
-        <p>Hier erscheint dann die Erklärung zum Wert.</p>
-      `;
+      // NEU: immer wieder auf den gemeinsamen Standardtext zurück
+      setDefaultInfoBox();
     });
 
     stampsGrid.appendChild(stamp);
   });
 }
+
 
 
 // Loading State
