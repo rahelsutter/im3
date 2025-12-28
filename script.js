@@ -177,7 +177,7 @@ function populateTimePicker() {
 // Beim Laden der Seite ausführen
 document.addEventListener('DOMContentLoaded', populateTimePicker);
 
-//Neueste Daten laden
+/*Neueste Daten laden
 async function loadLatestData(city) {
     showLoading();
     const dbCity = cityMapping[city];
@@ -196,6 +196,65 @@ async function loadLatestData(city) {
         showError('Fehler beim Laden der Daten.');
     }
 } 
+*/
+
+// Neueste Daten laden
+async function loadLatestData(city) {
+  showLoading();
+  const dbCity = cityMapping[city];
+
+  try {
+    const response = await fetch(
+      `https://im3.uv-index-usa.com/backend/api/getLatestByCity.php?city=${encodeURIComponent(dbCity)}`
+    );
+    const data = await response.json();
+
+    console.log('LATEST DATA:', data);          // zur Kontrolle
+    const timestamp = data.timestamp;           // z.B. "2025-12-28 15:00:00"
+    console.log('LATEST TIMESTAMP:', timestamp);
+
+    if (data && !data.error) {
+      // 1. Briefmarken anzeigen
+      displayStamps(data);
+
+      // 2. Datum & Zeit aus timestamp holen
+      if (timestamp) {
+        const [dateStr, rawTimeStr] = timestamp.split(' '); // ["2025-12-28", "15:00:00"]
+
+        // --- Datum setzen ---
+        datePicker.value = dateStr;                 // muss im Format YYYY-MM-DD sein
+        datePicker.classList.remove('placeholder');
+
+        // --- Uhrzeit normalisieren ---
+        // rawTimeStr kann z.B. "15:00:00" oder "15:00" oder "15" sein
+        let hourPart = rawTimeStr.split(':')[0];    // nimmt nur die Stunde
+        if (hourPart.length === 1) {
+          hourPart = '0' + hourPart;               // aus "5" wird "05"
+        }
+        const normalizedTime = `${hourPart}:00:00`; // wir bauen "HH:00:00"
+
+        // Prüfen, ob es diese Option im Timepicker wirklich gibt
+        const optionExists = Array.from(timePicker.options).some(
+          (opt) => opt.value === normalizedTime
+        );
+
+        if (optionExists) {
+          timePicker.value = normalizedTime;
+          timePicker.classList.remove('placeholder');
+        } else {
+          console.warn('Keine passende Timepicker-Option für', normalizedTime);
+        }
+      }
+    } else {
+      showError('Keine Daten für diese Stadt verfügbar.');
+    }
+  } catch (error) {
+    console.error('Fehler beim Laden der Daten:', error);
+    showError('Fehler beim Laden der Daten.');
+  }
+}
+
+
 
 
 function getLevelText(key, value) {
