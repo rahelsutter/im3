@@ -93,7 +93,7 @@ dialog {
   border: none;             
   color: var(--beige);          
   font-weight: 700;
-  font-size: 30px;         
+  font-size: 36px;         
   cursor: pointer;
   line-height: 1;
   padding: 0;
@@ -442,5 +442,38 @@ height: 69vh;
  footer p {
   color: grey; 
  }
+
+ /*--------------------------------------------------------------------Tablet-Ansicht-------------------------------------------------------*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* Karten übereinander statt nebeneinander */
+  .postcard-container {
+    flex-direction: column;            
+    justify-content: flex-start;
+    height: auto;
+    padding: 3vh 0;
+  }
+
+.stamp {
+    max-width: 8.5rem;
+    max-height: 8.5rem;
+}
+
+#btn-close {
+  position: absolute;
+  top: 2vh;
+  left: 5vw;
+  z-index: 10;
+}
+
+#btn-info {
+  position: absolute;
+  top: 2vh;
+  right: 5vw;
+  z-index: 10;
+}
+
+}
 
 

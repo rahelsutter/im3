@@ -361,10 +361,37 @@ function displayStamps(data) {
       setDefaultInfoBox();
     });
 
+    // CLICK-EVENT (Tablet/Mobile/auch Desktop)
+    stamp.addEventListener('click', () => {
+      if (!stampInfoBox || hasErrorState) return;
+
+      stampInfoBox.classList.remove('level-unbedenklich', 'level-maessig', 'level-schwer');
+
+      if (levelId === 'unbedenklich') stampInfoBox.classList.add('level-unbedenklich');
+      if (levelId === 'maessig')      stampInfoBox.classList.add('level-maessig');
+      if (levelId === 'schwer')       stampInfoBox.classList.add('level-schwer');
+
+      stampInfoBox.innerHTML = `
+        <button id="stamp-info-close" class="stamp-info-close">×</button>
+        <strong>${levelTitle}</strong>
+        <p>${levelText}</p>
+      `;
+
+      stampInfoBox.classList.add('is-open');
+    });
+
+
     stampsGrid.appendChild(stamp);
   });
 }
 
+document.addEventListener('click', (event) => {
+  if (!stampInfoBox) return;
+  const closeBtn = event.target.closest('#stamp-info-close');
+  if (closeBtn) {
+    stampInfoBox.classList.remove('is-open');
+  }
+});
 
 
 
