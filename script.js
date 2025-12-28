@@ -177,7 +177,7 @@ function populateTimePicker() {
 // Beim Laden der Seite ausführen
 document.addEventListener('DOMContentLoaded', populateTimePicker);
 
-// Neueste Daten laden
+//Neueste Daten laden
 async function loadLatestData(city) {
     showLoading();
     const dbCity = cityMapping[city];
@@ -195,7 +195,8 @@ async function loadLatestData(city) {
         console.error('Fehler beim Laden der Daten:', error);
         showError('Fehler beim Laden der Daten.');
     }
-}
+} 
+
 
 function getLevelText(key, value) {
   const v = parseFloat(value);
