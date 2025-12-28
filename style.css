@@ -39,7 +39,7 @@ main {
   margin-left: 5rem;
 }
 
-/* Container Weltkarte */
+
 .worldMapContainer {
   display: flex;
   align-items: center;
@@ -49,7 +49,7 @@ main {
   height: 100%;
    }
 
-/* SVG-Karte */
+
 #WorldMapwithPins {
   object-fit: contain;
   height: 90%;
@@ -60,15 +60,16 @@ main {
  .pin-label {
     opacity: 0;
     transition: opacity 0.2s ease;
-    pointer-events: none; /* verhindert, dass der Text das Hover blockiert */
+    pointer-events: none; 
 }
 
 .pin-group:hover .pin-label {
   opacity: 1;
+  
 }
 
-#Pin_Vancouver, #Pin_Bern, #Pin_Melbourne, #Pin_Shanghai, #Pin_Cairo, #Pin_RiodeJaneiro {
-    cursor: pointer;
+.pin-group {
+  cursor: pointer;
 }
 
 /*PopUp Vorder- und Rückseite Postkarte*/
@@ -233,7 +234,7 @@ height: 69vh;
  grid-column: 2 / 4;   /* Spalte 2–3 */
  grid-row: 1;          /* Zeile 1 */
  z-index: 2;
- padding: 10px 10px 20px 10px
+ padding: 10px 10px 20px 10px;
 }
 
 .date-input, .time-input {
@@ -355,7 +356,7 @@ height: 69vh;
 }
 
 
-/* Hover Tooltip */
+/* Hover Tooltip 
 .stamp-tooltip {
     position: absolute;
     bottom: 105%;
@@ -388,17 +389,13 @@ height: 69vh;
     margin-bottom: 4px;
     font-size: 12px;
 }
+    */
 
 /* Loading State */
 .stamps-grid.loading {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* Tooltip-Grundstil: kein schwarzer Rahmen */
-.stamp-tooltip {
-  border: none;
 }
 
 .stamp-info-box {
@@ -409,7 +406,7 @@ height: 69vh;
   width: 100%;
   max-width: 250px;
   min-height: 100px;
-  max-height: 190PX;
+  max-height: 190px;
   padding: 0.75rem 0.9rem;
   border-radius: 8px;
 }

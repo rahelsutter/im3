@@ -34,7 +34,7 @@ const stampInfoBox = document.getElementById('stamp-info-box');
 
 function setDefaultInfoBox() {
   if (!stampInfoBox) return;
-  stampInfoBox.className = 'stamp-info-box level-unbedenklich';
+  stampInfoBox.className = 'stamp-info-box';
   stampInfoBox.innerHTML = `
     <strong>Fahre mit der Maus über eine Briefmarke.</strong>
     <p>Hier erscheint dann die Einschätzung zum Wert.</p>
@@ -318,13 +318,11 @@ function displayStamps(data) {
   oldStamps.forEach(s => s.remove());
   stampsGrid.classList.remove('loading');
 
-  // Wir haben gültige Daten → Fehlerzustand zurücksetzen
   hasErrorState = false;
   datePicker.classList.remove('error');
   timePicker.classList.remove('error');
 
-  // NEU: Standardtext setzen (grüne Box mit Hinweis)
-  setDefaultInfoBox();
+  setDefaultInfoBox();  // Standardtext setzen
 
   stampOrder.forEach(key => {
     const config = stampMapping[key];
@@ -344,10 +342,8 @@ function displayStamps(data) {
       </div>
     `;
 
-    // Hover nur, wenn KEIN Fehlerzustand
     stamp.addEventListener('mouseenter', () => {
       if (!stampInfoBox || hasErrorState) return;
-
       stampInfoBox.classList.remove('level-unbedenklich','level-maessig','level-schwer');
 
       if (levelId === 'unbedenklich') stampInfoBox.classList.add('level-unbedenklich');
@@ -362,13 +358,13 @@ function displayStamps(data) {
 
     stamp.addEventListener('mouseleave', () => {
       if (!stampInfoBox || hasErrorState) return;
-      // NEU: immer wieder auf den gemeinsamen Standardtext zurück
       setDefaultInfoBox();
     });
 
     stampsGrid.appendChild(stamp);
   });
 }
+
 
 
 
