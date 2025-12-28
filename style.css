@@ -49,6 +49,12 @@ main {
   height: 100%;
    }
 
+.worldMapScroll {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; 
+}
+
 
 #WorldMapwithPins {
   object-fit: contain;
@@ -446,6 +452,29 @@ height: 69vh;
  /*--------------------------------------------------------------------Tablet-Ansicht-------------------------------------------------------*/
 
 @media (min-width: 768px) and (max-width: 1024px) {
+
+  .worldMapContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--blue);
+    border-top-left-radius: 30px;
+    height: 100%;
+    overflow: hidden;          /* Blau bleibt Rahmen */
+  }
+
+  .worldMapScroll {
+    overflow-x: auto;          /* horizontal scrollbar mit Finger */
+    overflow-y: hidden;
+  }
+
+  #WorldMapwithPins {
+    height: 100%;
+    width: 160%;               /* “Zoom” in die Karte */
+    object-fit: contain;
+  }
+
+
 
   /* Karten übereinander statt nebeneinander */
   .postcard-container {
