@@ -8,6 +8,7 @@
   --orange: #C26E4B;  /* Hintergrund Website */
   --blue:   #51657E;  /* Hintergrund Weltkarte */
   --beige:   #F2DFC1;  /* Hintergrund Postkarten */
+  --red: #C89DAB; 
   --weiss: #FFFFFF;  
   --schwarz: #000000; 
 }
@@ -257,6 +258,13 @@ height: 69vh;
   color: transparent;       
 }
 
+/* Fehlerzustand für Date/Time-Felder */
+.date-input.error,
+.time-input.error {
+ background-color: var(--red);
+}
+
+
 
 /* Einzelne Briefmarke */
 .stamp {
@@ -394,8 +402,8 @@ height: 69vh;
 }
 
 .stamp-info-box {
-  grid-column: 2 / 4;   /* Spalte 2–3 */
-  grid-row: 3 / 5;      /* Zeilen 3 und 4 */
+  grid-column: 2 / 4;  
+  grid-row: 3 / 5;      
   align-self: center;
   justify-self: center;
   width: 100%;
@@ -421,7 +429,7 @@ height: 69vh;
 }
 
 .level-schwer {
-  background-color: #C89DAB;
+  background-color: var(--red);
 }
 
  footer {

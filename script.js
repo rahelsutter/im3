@@ -14,6 +14,8 @@ const stampMapping = {
     'ragweed_pollen': { image: 'assets/Stamps/RagweedPollenStamp.svg', alt: 'State of Ragweed Pollen in the air', thresholds: { good: 10, medium: 50}},
 }
 
+let hasErrorState = false;
+
 const stampOrder = ['pm2_5', 'dust', 'uv_index', 'nitrogen_dioxide', 'carbon_monoxide', 'alder_pollen', 'birch_pollen', 'grass_pollen', 'mugwort_pollen', 'olive_pollen', 'ragweed_pollen'];
 
 const cityMapping = {
@@ -301,68 +303,75 @@ function getLevelText(key, value) {
 }
 
 // Briefmarken anzeigen
+// Briefmarken anzeigen
 function displayStamps(data) {
-
   const oldStamps = stampsGrid.querySelectorAll('.stamp');
   oldStamps.forEach(s => s.remove());
-
   stampsGrid.classList.remove('loading');
-  
+
+  // Wir haben gültige Daten → Fehlerzustand zurücksetzen
+  hasErrorState = false;
+  datePicker.classList.remove('error');
+  timePicker.classList.remove('error');
+
   stampOrder.forEach(key => {
     const config = stampMapping[key];
     if (!config) return;
 
     const stamp = document.createElement('div');
     stamp.className = `stamp stamp-${key}`;
-    
-// erklärt, was angezeigt werden soll (wie viel Kommastellen & was wenn kein Wert gefunden werden kann)
-const rawValue = data[key];
-const value =
-  rawValue !== null && rawValue !== undefined
-    ? parseFloat(rawValue).toFixed(2)
-    : '0';
 
-const [levelId, levelTitle, levelText] = getLevelText(key, value);
+    const rawValue = data[key];
+    const value = rawValue !== null && rawValue !== undefined ? parseFloat(rawValue).toFixed(2) : '0';
+    const [levelId, levelTitle, levelText] = getLevelText(key, value);
 
-stamp.innerHTML = `
-  <div class="stamp-image-wrapper ${key}">
-    <img src="${config.image}" alt="${config.alt}" class="stamp-image">
-    <div class="stamp-value-overlay">${value}</div>
-  </div>
-`;
+    stamp.innerHTML = `
+      <div class="stamp-image-wrapper ${key}">
+        <img src="${config.image}" alt="${config.alt}" class="stamp-image" />
+        <div class="stamp-value-overlay">${value}</div>
+      </div>
+    `;
 
-stamp.addEventListener('mouseenter', () => {
-  if (!stampInfoBox) return;
+    // Hover: nur aktiv, wenn KEIN Fehlerzustand
+    stamp.addEventListener('mouseenter', () => {
+      if (!stampInfoBox || hasErrorState) return;
 
-  stampInfoBox.classList.remove('level-unbedenklich','level-maessig','level-schwer');
-  if (levelId === 'unbedenklich') stampInfoBox.classList.add('level-unbedenklich');
-  if (levelId === 'maessig')      stampInfoBox.classList.add('level-maessig');
-  if (levelId === 'schwer')       stampInfoBox.classList.add('level-schwer');
+      stampInfoBox.classList.remove('level-unbedenklich','level-maessig','level-schwer');
 
-  stampInfoBox.innerHTML = `
-    <strong>${levelTitle}</strong>
-    <p>${levelText}</p>
-  `;
-});
+      if (levelId === 'unbedenklich') stampInfoBox.classList.add('level-unbedenklich');
+      if (levelId === 'maessig')      stampInfoBox.classList.add('level-maessig');
+      if (levelId === 'schwer')       stampInfoBox.classList.add('level-schwer');
 
-stamp.addEventListener('mouseleave', () => {
-  if (!stampInfoBox) return;
-  stampInfoBox.classList.remove('level-maessig','level-schwer');
-  stampInfoBox.classList.add('level-unbedenklich');
-  stampInfoBox.innerHTML = `
-    <strong>Fahre mit der Maus über eine Briefmarke.</strong>
-    <p>Hier erscheint dann die Erklärung zum Wert.</p>
-  `;
-});
+      stampInfoBox.innerHTML = `
+        <strong>${levelTitle}</strong>
+        <p>${levelText}</p>
+      `;
+    });
 
+    stamp.addEventListener('mouseleave', () => {
+      if (!stampInfoBox || hasErrorState) return;
+
+      stampInfoBox.classList.remove('level-maessig','level-schwer');
+      stampInfoBox.classList.add('level-unbedenklich');
+      stampInfoBox.innerHTML = `
+        <strong>Fahre mit der Maus über eine Briefmarke.</strong>
+        <p>Hier erscheint dann die Erklärung zum Wert.</p>
+      `;
+    });
 
     stampsGrid.appendChild(stamp);
   });
 }
 
+
 // Loading State
 function showLoading() {
   if (!stampInfoBox) return;
+
+  hasErrorState = false;
+  datePicker.classList.remove('error');
+  timePicker.classList.remove('error');
+
   stampInfoBox.className = 'stamp-info-box';
   stampInfoBox.innerHTML = `
     <strong>Lade Daten...</strong>
@@ -370,15 +379,24 @@ function showLoading() {
   `;
 }
 
+
 // Error State
 function showError(message) {
   if (!stampInfoBox) return;
+
+  hasErrorState = true;
+
+  // Date/Time-Felder optisch markieren
+  datePicker.classList.add('error');
+  timePicker.classList.add('error');
+
   stampInfoBox.className = 'stamp-info-box level-schwer';
   stampInfoBox.innerHTML = `
-    <strong>Fehler</strong>
+    <strong>Keine Messwerte verfügbar</strong>
     <p>${message}</p>
   `;
 }
+
 
 // Datepicker Event Listeners
 datePicker.addEventListener('change', () => {
@@ -423,7 +441,7 @@ async function loadDataByDateTime(date, time) {
         if (data && data.length > 0) {
             displayStamps(data[0]);
         } else {
-            showError('Keine Daten für diesen Zeitpunkt verfügbar.');
+            showError('Es sind leider keine Daten für diesen Zeitpunkt verfügbar. Die Briefmarken zeigen weiterhin die zuletzt geladenen Werte.');
         }
     } catch (error) {
         console.error('Fehler:', error);
