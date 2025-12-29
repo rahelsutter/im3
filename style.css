@@ -81,8 +81,8 @@ main {
 /*PopUp Vorder- und Rückseite Postkarte*/
 dialog {
     position: absolute;
-    width: 85vw;
-    height: 85vh;  
+    width: 90vw;
+    height: 90vh;  
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -484,7 +484,7 @@ height: 69vh;
 }
 
 
-/*-------------------------------------------------------------------Mobile Ansicht--------------------------------------------------------------------------------------------------
+/*-------------------------------------------------------------------Mobile Ansicht--------------------------------------------------------------------------------------------------*/
 
 @media (max-width: 768px) {
 
@@ -523,12 +523,19 @@ main {
   }
 
 
+
  dialog {
     position: fixed;              
     width: 100vw;
     height: 100vh;
   }
   
+  footer {
+  margin-left: 3rem;
+}
+
+
+/*
 
   .postcard-front {
     display: block;
@@ -579,12 +586,7 @@ main {
   font-weight: 700;
 }
 
-
-
-footer {
-  margin-left: 3rem;
-}
-
-
-}
 */
+
+}
+

@@ -43,6 +43,9 @@ const Pin_Melbourne = document.querySelector('#Pin_Melbourne');
 const dialog = document.querySelector('#dialog');
 const postcardImg = document.querySelector('#postcard-image');
 const btn_close = document.querySelector('#btn-close');
+const btn_info    = document.querySelector('#btn-info');
+const infoOverlay = document.querySelector('#info-overlay');
+const infoClose   = document.querySelector('#info-close');
 
 
 
@@ -383,6 +386,14 @@ Pin_Melbourne.addEventListener('click', () => {
 
 btn_close.addEventListener('click', function() {
   dialog.close();
+});
+
+btn_info.addEventListener('click', () => {
+  infoOverlay.style.display = 'block';
+});
+
+infoClose.addEventListener('click', () => {
+  infoOverlay.style.display = 'none';
 });
 
 
