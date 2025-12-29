@@ -240,14 +240,14 @@ height: 69vh;
  grid-column: 2 / 4;   /* Spalte 2–3 */
  grid-row: 1;          /* Zeile 1 */
  z-index: 2;
- padding: 10px 10px 20px 10px;
+ padding: 10px 10px 30px 10px;
 }
 
 .date-input, .time-input {
-    padding: 6px 8px;
+    padding: 0px 8px;
     border: 2px solid #333;
     border-radius: 5px;
-    background-color: var(--weiss);
+    background-color: var(--beige);
     font-size: 13px;
     cursor: pointer;
 }
@@ -361,41 +361,6 @@ height: 69vh;
     left: 53%;
 }
 
-
-/* Hover Tooltip 
-.stamp-tooltip {
-    position: absolute;
-    bottom: 105%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--beige);
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 2px solid #333;
-    min-width: 180px;
-    max-width: 250px;
-    z-index: 1000;
-    display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    pointer-events: none;
-}
-
-.stamp:hover .stamp-tooltip {
-    display: block;
-}
-
-.stamp-tooltip p {
-    margin: 0;
-    font-size: 11px;
-    line-height: 1.4;
-}
-
-.stamp-tooltip strong {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 12px;
-}
-    */
 
 /* Loading State */
 .stamps-grid.loading {
