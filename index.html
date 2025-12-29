@@ -614,9 +614,24 @@
 
   <!-- Dialog Start (Pop-up)-->
   <dialog id="dialog">
-    <button id="btn-close" autofocus>X</button>
-    <button id="btn-info" aria-label="Informationen">i</button>
 
+  <div class="popup-header">
+    <button id="btn-close" autofocus>X</button>
+
+   <div class="popup-tabs">
+      <button class="popup-tab popup-tab-front popup-tab--active" type="button" data-view="front">
+        Vorderseite
+      </button>
+      <button class="popup-tab popup-tab-back" type="button" data-view="back">
+        Rückseite
+      </button>
+   </div>
+
+    <button id="btn-info" aria-label="Informationen">i</button>
+  </div>
+
+
+<div class="popup-body">
     <div class="postcard-container">
       <section class="postcard-front">
         <img id="postcard-image" src="" alt="">
@@ -663,8 +678,8 @@
            <div id="stamp-info-box">
            </div>  
       </section>
-
     </div>
+  </div>
   </dialog>
   <!-- Dialog Ende-->
   </main>
@@ -678,4 +693,4 @@
 
 </body>
 
-</html> 
+</html>
