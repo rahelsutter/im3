@@ -530,33 +530,13 @@ main {
   }
   
 
+  .postcard-front {
+    display: block;
+  }
 
-dialog.view-front .postcard-front {
-  display: grid;
-}
-
-dialog.view-front .postcard-back {
-  display: none;
-}
-
-dialog.view-back .postcard-front {
-  display: none;
-}
-
-dialog.view-back .postcard-back {
-  display: grid;
-}
-
-
-dialog.view-info .postcard-front {
-  display: grid;
-}
-
-dialog.view-info #info-overlay {
-  display: block;
-}
-
-
+  .postcard-back {
+    display: none;
+  }
 
 
   .postcard-container {
@@ -593,25 +573,12 @@ dialog.view-info #info-overlay {
   border-color: rgba(0, 0, 0, 0.3);
 }
 
-
 .popup-tab--active {
   background: var(--beige);
   border-color: rgba(0, 0, 0, 0.3);
   font-weight: 700;
 }
 
-  .popup-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0.5rem 0;
-    background: var(--orange);
-    color: var(--weiss);
-  }
-
-  .postcard-front #info-overlay {
-    padding-top: 48px; 
-  } 
 
 
 footer {

@@ -1,7 +1,5 @@
 let currentCity = '';
 let hasErrorState = false;
-let currentView = 'back';       
-let lastNonInfoView = 'back';   
 
 const stampMapping = {
    'pm2_5': { image: 'assets/Stamps/ParticulateMatterStamp.svg', alt: 'Particulate Matter in grams per cubic meter', thresholds: { good: 15, medium: 25 }},
@@ -48,6 +46,8 @@ const btn_close = document.querySelector('#btn-close');
 const btn_info = document.querySelector('#btn-info');
 const infoClose = document.querySelector('#info-close');
 const tabs = document.querySelectorAll('.popup-tab');
+const postcardFront = document.querySelector('.postcard-front');
+const postcardBack  = document.querySelector('.postcard-back');
 
 
 
@@ -68,38 +68,6 @@ function resetPickersUI() {
   timePicker.classList.add('placeholder');
 }
 
-
-// === Mobile View-Logik (Front / Back / Info) ===
-function setActiveTab(view) {
-  tabs.forEach((tab) => {
-    if (tab.dataset.view === view) {
-      tab.classList.add('popup-tab--active');
-    } else {
-      tab.classList.remove('popup-tab--active');
-    }
-  });
-}
-
-function showFrontView() {
-  currentView = 'front';
-  dialog.classList.remove('view-back', 'view-info');
-  dialog.classList.add('view-front');
-  setActiveTab('front');
-}
-
-function showBackView() {
-  currentView = 'back';
-  dialog.classList.remove('view-front', 'view-info');
-  dialog.classList.add('view-back');
-  setActiveTab('back');
-}
-
-function showInfoView() {
-  currentView = 'info';
-  dialog.classList.remove('view-front', 'view-back');
-  dialog.classList.add('view-info');
-  // Tabs bleiben so, wie sie vorher waren (Front/Back)
-}
 
 
 // Loading State
@@ -390,7 +358,6 @@ async function openPostcard(city, imagePath) {
     // Neueste Daten laden
     await loadLatestData(city);
 
-    showBackView();
 }
 
 
@@ -423,30 +390,6 @@ btn_close.addEventListener('click', function() {
   dialog.close();
 });
 
-btn_info.addEventListener('click', () => {
-  if (currentView === 'info') {
-    // Info ist offen -> zurück zu letzter Front/Back-Ansicht
-    if (lastNonInfoView === 'front') {
-      showFrontView();
-    } else {
-      showBackView();
-    }
-  } else {
-    // Info ist geschlossen -> merken, welche Ansicht aktiv war, dann Info öffnen
-    lastNonInfoView = currentView;
-    showInfoView();
-  }
-});
-
-
-infoClose.addEventListener('click', () => {
-  // X im Overlay -> zurück zur zuletzt aktiven Front/Back
-  if (lastNonInfoView === 'front') {
-    showFrontView();
-  } else {
-    showBackView();
-  }
-});
 
 // Datepicker Event Listeners
 datePicker.addEventListener('change', () => {
@@ -502,21 +445,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     pin.addEventListener("mouseleave", () => {
       pin.style.transform = "scale(1)";
-    });
-  });
-
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const view = tab.dataset.view; // 'front' oder 'back'
-
-      if (view === 'front') {
-        showFrontView();
-        lastNonInfoView = 'front';
-      } else if (view === 'back') {
-        showBackView();
-        lastNonInfoView = 'back';
-      }
     });
   });
 
