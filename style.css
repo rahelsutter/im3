@@ -484,7 +484,7 @@ height: 69vh;
 }
 
 
-/*-------------------------------------------------------------------Mobile Ansicht--------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------Mobile Ansicht--------------------------------------------------------------------------------------------------
 
 @media (max-width: 768px) {
 
@@ -499,27 +499,27 @@ main {
     background: var(--blue);
     border-top-left-radius: 30px;
     height: 100%;
-    overflow: hidden;          /* Blau bleibt Rahmen */
+    overflow: hidden;         
   }
 
   .worldMapScroll {
-    overflow-x: auto;          /* horizontal scrollbar mit Finger */
+    overflow-x: auto;          
     overflow-y: hidden;
   }
 
   #WorldMapwithPins {
     height: 100%;
-    width: 300%;               /* “Zoom” in die Karte */
+    width: 300%;               
     object-fit: contain;
   }
 
     .pin-label {
-    opacity: 1;          /* immer sichtbar */
+    opacity: 1;          
     pointer-events: none;
   }
 
   .pin-group:hover .pin-label {
-    opacity: 1;          /* Hover ändert nichts mehr */
+    opacity: 1;          
   }
 
 
@@ -587,3 +587,4 @@ footer {
 
 
 }
+*/
