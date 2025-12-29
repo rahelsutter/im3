@@ -487,7 +487,6 @@ height: 69vh;
 
 @media (max-width: 768px) {
 
-
 main {
   margin-left: 3rem;
 }
@@ -523,7 +522,14 @@ main {
   }
 
 
-/* Zustände für den Dialog */
+ dialog {
+    position: fixed;              
+    width: 100vw;
+    height: 100vh;
+  }
+  
+
+
 dialog.view-front .postcard-front {
   display: grid;
 }
@@ -540,7 +546,7 @@ dialog.view-back .postcard-back {
   display: grid;
 }
 
-/* Info-Ansicht: Vorderseite sichtbar + Overlay an */
+
 dialog.view-info .postcard-front {
   display: grid;
 }
@@ -551,16 +557,35 @@ dialog.view-info #info-overlay {
 
 
 .popup-header {
-  display: none; /* standardmässig für Desktop aus */
+  display: none; 
 }
 
-/* Tabs allgemein */
+  .postcard-container {
+    display: block;         
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .postcard-front,
+  .postcard-back {
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
+
+
+
+
 .popup-tabs {
   display: flex;
   gap: 8px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   padding: 0 1rem 0.5rem;
 }
+
+
 
 .popup-tab {
   flex: 1;
@@ -574,19 +599,14 @@ dialog.view-info #info-overlay {
   border-color: rgba(0, 0, 0, 0.3);
 }
 
-/* aktiver Tab */
+
 .popup-tab--active {
   background: var(--beige);
   border-color: rgba(0, 0, 0, 0.3);
   font-weight: 700;
 }
 
-  dialog {
-    width: 100vw;
-    height: 100vh;
-    transform: translate(-10%, -10%);
-    border-radius: 0;
-  }
+ 
 
   .popup-header {
     display: flex;
@@ -597,20 +617,14 @@ dialog.view-info #info-overlay {
     color: var(--weiss);
   }
 
-  .postcard-front,
-  .postcard-back {
-    width: 100%;
-    height: 100%;
-    transform: none;
-  }
 
-  /* Info-Overlay im Mobile: Vollfläche */
+
+  
   .postcard-front #info-overlay {
-    padding-top: 48px; /* Platz für Info-Tab/Close oben, falls nötig */
-  }
+    padding-top: 48px; 
+  } 
 
-
-
+  */
 
 
 
@@ -618,5 +632,6 @@ dialog.view-info #info-overlay {
 footer {
   margin-left: 3rem;
 }
+
 
 }
