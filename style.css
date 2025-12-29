@@ -456,6 +456,11 @@ height: 69vh;
     padding: 3vh 0;
   }
 
+.postcard-back {
+  padding: 1.5vh 3vw;
+}
+
+
 .stamp {
     max-width: 8.5rem;
     max-height: 8.5rem;
