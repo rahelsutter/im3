@@ -174,6 +174,45 @@ infoClose.addEventListener('click', () => {
   infoOverlay.style.display = 'none';
 });
 
+
+
+// Tabs in der Postkarte (Vorderseite / Rückseite)
+document.addEventListener('DOMContentLoaded', () => {
+  // Alle Tabs (Buttons) im Dialog holen
+  const tabs = document.querySelectorAll('.popup-tab');
+
+  // Die beiden Bereiche im Dialog holen
+  const postcardFront = document.querySelector('.postcard-front');
+  const infoOverlay = document.querySelector('#info-overlay');
+
+  // Für jeden Tab einen Klick-Listener einrichten
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      // Auslesen, welche Ansicht dieser Tab steuert
+      const view = tab.dataset.view; // "front" oder "back"
+
+      // Zuerst alle Tabs als "nicht aktiv" markieren
+      tabs.forEach((t) => t.classList.remove('popup-tab--active'));
+      // Den geklickten Tab als aktiv markieren
+      tab.classList.add('popup-tab--active');
+
+      // Ansicht im Dialog umschalten
+      if (view === 'front') {
+        // Vorderseite zeigen, Info-Overlay verstecken
+        postcardFront.style.display = 'block';
+        infoOverlay.style.display = 'none';
+      } else if (view === 'back') {
+        // Rückseite (Info-Overlay) zeigen, Vorderseite verstecken
+        postcardFront.style.display = 'none';
+        infoOverlay.style.display = 'block';
+      }
+    });
+  });
+});
+
+
+
+
 // Generiere Uhrzeiten von 00:00 bis 23:00
 function populateTimePicker() {
     const timePicker = document.getElementById('timePicker');
