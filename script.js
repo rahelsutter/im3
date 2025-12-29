@@ -1,4 +1,7 @@
 let currentCity = '';
+let hasErrorState = false;
+let currentView = 'back';       
+let lastNonInfoView = 'back';   
 
 const stampMapping = {
    'pm2_5': { image: 'assets/Stamps/ParticulateMatterStamp.svg', alt: 'Particulate Matter in grams per cubic meter', thresholds: { good: 15, medium: 25 }},
@@ -14,7 +17,6 @@ const stampMapping = {
     'ragweed_pollen': { image: 'assets/Stamps/RagweedPollenStamp.svg', alt: 'State of Ragweed Pollen in the air', thresholds: { good: 10, medium: 50}},
 }
 
-let hasErrorState = false;
 
 const stampOrder = ['pm2_5', 'dust', 'uv_index', 'nitrogen_dioxide', 'carbon_monoxide', 'alder_pollen', 'birch_pollen', 'grass_pollen', 'mugwort_pollen', 'olive_pollen', 'ragweed_pollen'];
 
@@ -27,52 +29,11 @@ const cityMapping = {
     'Melbourne': 'Melbourne'
 };
 
+
 const stampsGrid = document.querySelector('.postcard-back');
 const datePicker = document.getElementById('datePicker');
 const timePicker = document.getElementById('timePicker');
 const stampInfoBox = document.getElementById('stamp-info-box');
-
-function setDefaultInfoBox() {
-  if (!stampInfoBox) return;
-  stampInfoBox.className = 'stamp-info-box';
-  stampInfoBox.innerHTML = `
-    <strong>Fahre mit der Maus über eine Briefmarke.</strong>
-    <p>Hier erscheint dann die Einschätzung zum Wert.</p>
-  `;
-}
-
-
-function resetPickersUI() {
-  datePicker.value = '';
-  timePicker.value = '';
-
-  datePicker.classList.add('placeholder');
-  timePicker.classList.add('placeholder');
-}
-
-async function getAll() {
-    const url = 'https://im3.uv-index-usa.com/backend/api/getAll.php';
-try {
-    const response = await fetch(url); //-> await: Code muss warten bis API zurück kommt?
-    const data = await response.json();
-    console.log(data); // gibt die Daten der API in der Konsole aus
-} catch (error) {
-    console.error(error)
-    }
-}
-
-getAll()
-
-async function getByDate(date) {
-        const url = `https://im3.uv-index-usa.com/backend/api/getByDate.php?date=${date}`;
-try {
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data); // gibt die Daten der API in der Konsole aus
-} catch (error) {
-    console.error(error)
-    }
-}
 
 const Pin_Bern = document.querySelector('#Pin_Bern');
 const Pin_Cairo = document.querySelector('#Pin_Cairo');
@@ -84,229 +45,98 @@ const Pin_Melbourne = document.querySelector('#Pin_Melbourne');
 const dialog = document.querySelector('#dialog');
 const postcardImg = document.querySelector('#postcard-image');
 const btn_close = document.querySelector('#btn-close');
-const worldWrapper = document.querySelector('.world-wrapper'); // HIER
-
-async function openPostcard(city, imagePath) {
-    currentCity = city; // Stadt speichern
-    postcardImg.alt = `Postkarte ${city}`;
-    const preloadImg = new Image();
-    preloadImg.src = imagePath;
-    preloadImg.onload = () => {
-        postcardImg.src = imagePath;
-        dialog.showModal();
-    };
-    
-    // Datepicker zurücksetzen
-    datePicker.value = '';
-    timePicker.value = '';
-    resetPickersUI();       
-    
-    // Neueste Daten laden
-    await loadLatestData(city);
-}
-
-Pin_Bern.addEventListener('click', () => {
-  openPostcard('Bern', 'assets/Postkarte_Bern.png');
-});
-
-Pin_Vancouver.addEventListener('click', () => {
-  openPostcard('Vancouver', 'assets/Postkarte_Vancouver.png');
-});
-
-Pin_RiodeJaneiro.addEventListener('click', () => {
-  openPostcard('Rio de Janeiro', 'assets/Postkarte_RiodeJaneiro.png');
-});
-
-Pin_Cairo.addEventListener('click', () => {
-  openPostcard('Kairo', 'assets/Postkarte_Kairo.png');
-});
-
-Pin_Shanghai.addEventListener('click', () => {
-  openPostcard('Shanghai', 'assets/Postkarte_Shanghai.png');
-});
-
-Pin_Melbourne.addEventListener('click', () => {
-  openPostcard('Melbourne', 'assets/Postkarte_Melbourne.png');
-});
-
-btn_close.addEventListener('click', function() {
-  dialog.close();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const pinIds = [
-    "Pin_Vancouver",
-    "Pin_RiodeJaneiro",
-    "Pin_Bern",
-    "Pin_Cairo",
-    "Pin_Shanghai",
-    "Pin_Melbourne"
-  ];
-
-  pinIds.forEach(id => {
-    const pin = document.getElementById(id);
-    if (!pin) return;
-
-    pin.style.transformBox = "fill-box";
-    pin.style.transformOrigin = "center";
-    pin.style.transition = "transform 0.2s ease";
-
-    pin.addEventListener("mouseenter", () => {
-      pin.style.transform = "scale(1.3)";
-    });
-
-    pin.addEventListener("mouseleave", () => {
-      pin.style.transform = "scale(1)";
-    });
-  });
-});
-
-// i-PopUp //
 const btn_info = document.querySelector('#btn-info');
-const infoOverlay = document.querySelector('#info-overlay');
 const infoClose = document.querySelector('#info-close');
-
-btn_info.addEventListener('click', () => {
-  infoOverlay.style.display = 'block';
-});
-
-infoClose.addEventListener('click', () => {
-  infoOverlay.style.display = 'none';
-});
+const tabs = document.querySelectorAll('.popup-tab');
 
 
 
-// Tabs in der Postkarte (Vorderseite / Rückseite)
-document.addEventListener('DOMContentLoaded', () => {
-  // Alle Tabs (Buttons) im Dialog holen
-  const tabs = document.querySelectorAll('.popup-tab');
+function setDefaultInfoBox() {
+  if (!stampInfoBox) return;
+  stampInfoBox.className = 'stamp-info-box';
+  stampInfoBox.innerHTML = `
+    <strong>Fahre mit der Maus über eine Briefmarke.</strong>
+    <p>Hier erscheint dann die Einschätzung zum Wert.</p>
+  `;
+}
 
-  // Die beiden Bereiche im Dialog holen
-  const postcardFront = document.querySelector('.postcard-front');
-  const infoOverlay = document.querySelector('#info-overlay');
+function resetPickersUI() {
+  datePicker.value = '';
+  timePicker.value = '';
 
-  // Für jeden Tab einen Klick-Listener einrichten
+  datePicker.classList.add('placeholder');
+  timePicker.classList.add('placeholder');
+}
+
+
+// === Mobile View-Logik (Front / Back / Info) ===
+function setActiveTab(view) {
   tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      // Auslesen, welche Ansicht dieser Tab steuert
-      const view = tab.dataset.view; // "front" oder "back"
-
-      // Zuerst alle Tabs als "nicht aktiv" markieren
-      tabs.forEach((t) => t.classList.remove('popup-tab--active'));
-      // Den geklickten Tab als aktiv markieren
+    if (tab.dataset.view === view) {
       tab.classList.add('popup-tab--active');
-
-      // Ansicht im Dialog umschalten
-      if (view === 'front') {
-        // Vorderseite zeigen, Info-Overlay verstecken
-        postcardFront.style.display = 'block';
-        infoOverlay.style.display = 'none';
-      } else if (view === 'back') {
-        // Rückseite (Info-Overlay) zeigen, Vorderseite verstecken
-        postcardFront.style.display = 'none';
-        infoOverlay.style.display = 'block';
-      }
-    });
-  });
-});
-
-
-
-
-// Generiere Uhrzeiten von 00:00 bis 23:00
-function populateTimePicker() {
-    const timePicker = document.getElementById('timePicker');
-    for (let i = 0; i < 24; i++) {
-        const hour = i.toString().padStart(2, '0');
-        const option = document.createElement('option');
-        option.value = `${hour}:00:00`;
-        option.textContent = `${hour}:00`;
-        timePicker.appendChild(option);
-    }
-}
-
-// Beim Laden der Seite ausführen
-document.addEventListener('DOMContentLoaded', populateTimePicker);
-
-/*Neueste Daten laden
-async function loadLatestData(city) {
-    showLoading();
-    const dbCity = cityMapping[city];
-    
-    try {
-        const response = await fetch(`https://im3.uv-index-usa.com/backend/api/getLatestByCity.php?city=${encodeURIComponent(dbCity)}`);
-        const data = await response.json();
-        
-        if (data && !data.error) {
-            displayStamps(data);
-        } else {
-            showError('Keine Daten für diese Stadt verfügbar.');
-        }
-    } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error);
-        showError('Fehler beim Laden der Daten.');
-    }
-} 
-*/
-
-// Neueste Daten laden
-async function loadLatestData(city) {
-  showLoading();
-  const dbCity = cityMapping[city];
-
-  try {
-    const response = await fetch(
-      `https://im3.uv-index-usa.com/backend/api/getLatestByCity.php?city=${encodeURIComponent(dbCity)}`
-    );
-    const data = await response.json();
-
-    console.log('LATEST DATA:', data);          // zur Kontrolle
-    const timestamp = data.timestamp;           // z.B. "2025-12-28 15:00:00"
-    console.log('LATEST TIMESTAMP:', timestamp);
-
-    if (data && !data.error) {
-      // 1. Briefmarken anzeigen
-      displayStamps(data);
-
-      // 2. Datum & Zeit aus timestamp holen
-      if (timestamp) {
-        const [dateStr, rawTimeStr] = timestamp.split(' '); // ["2025-12-28", "15:00:00"]
-
-        // --- Datum setzen ---
-        datePicker.value = dateStr;                 // muss im Format YYYY-MM-DD sein
-        datePicker.classList.remove('placeholder');
-
-        // --- Uhrzeit normalisieren ---
-        // rawTimeStr kann z.B. "15:00:00" oder "15:00" oder "15" sein
-        let hourPart = rawTimeStr.split(':')[0];    // nimmt nur die Stunde
-        if (hourPart.length === 1) {
-          hourPart = '0' + hourPart;               // aus "5" wird "05"
-        }
-        const normalizedTime = `${hourPart}:00:00`; // wir bauen "HH:00:00"
-
-        // Prüfen, ob es diese Option im Timepicker wirklich gibt
-        const optionExists = Array.from(timePicker.options).some(
-          (opt) => opt.value === normalizedTime
-        );
-
-        if (optionExists) {
-          timePicker.value = normalizedTime;
-          timePicker.classList.remove('placeholder');
-        } else {
-          console.warn('Keine passende Timepicker-Option für', normalizedTime);
-        }
-      }
     } else {
-      showError('Keine Daten für diese Stadt verfügbar.');
+      tab.classList.remove('popup-tab--active');
     }
-  } catch (error) {
-    console.error('Fehler beim Laden der Daten:', error);
-    showError('Fehler beim Laden der Daten.');
-  }
+  });
+}
+
+function showFrontView() {
+  currentView = 'front';
+  dialog.classList.remove('view-back', 'view-info');
+  dialog.classList.add('view-front');
+  setActiveTab('front');
+}
+
+function showBackView() {
+  currentView = 'back';
+  dialog.classList.remove('view-front', 'view-info');
+  dialog.classList.add('view-back');
+  setActiveTab('back');
+}
+
+function showInfoView() {
+  currentView = 'info';
+  dialog.classList.remove('view-front', 'view-back');
+  dialog.classList.add('view-info');
+  // Tabs bleiben so, wie sie vorher waren (Front/Back)
 }
 
 
+// Loading State
+function showLoading() {
+  if (!stampInfoBox) return;
 
+  hasErrorState = false;
+  datePicker.classList.remove('error');
+  timePicker.classList.remove('error');
+
+  stampInfoBox.className = 'stamp-info-box';
+  stampInfoBox.innerHTML = `
+    <strong>Lade Daten...</strong>
+    <p>Bitte einen Moment warten.</p>
+  `;
+}
+
+
+// Error State
+function showError(message) {
+  if (!stampInfoBox) return;
+
+  hasErrorState = true;
+
+  // Date/Time-Felder optisch markieren
+  datePicker.classList.add('error');
+  timePicker.classList.add('error');
+
+  stampInfoBox.className = 'stamp-info-box level-schwer';
+  stampInfoBox.innerHTML = `
+    <strong>Keine Messwerte verfügbar</strong>
+    <p>${message}</p>
+  `;
+}
+
+
+// Daten-Funktionen (API & Datenverarbeitung)-------------------------------------------------------------------------------------------------------------------
 
 function getLevelText(key, value) {
   const v = parseFloat(value);
@@ -350,6 +180,8 @@ function getLevelText(key, value) {
 
   return ['unbedenklich','Keine Einstufung','Für diesen Wert ist noch kein Text definiert.'];
 }
+
+
 
 // Briefmarken anzeigen
 function displayStamps(data) {
@@ -425,67 +257,63 @@ function displayStamps(data) {
   });
 }
 
-document.addEventListener('click', (event) => {
-  if (!stampInfoBox || !stampInfoBox.classList.contains('is-open')) return;
 
-  const clickedInsideInfoBox = stampInfoBox.contains(event.target);
-  const clickedStamp = event.target.closest('.stamp');
+// Neueste Daten laden
+async function loadLatestData(city) {
+  showLoading();
+  const dbCity = cityMapping[city];
 
-  // Klick war weder auf Infobox noch auf Briefmarke
-  if (!clickedInsideInfoBox && !clickedStamp) {
-    stampInfoBox.classList.remove('is-open');
-    setDefaultInfoBox();
+  try {
+    const response = await fetch(
+      `https://im3.uv-index-usa.com/backend/api/getLatestByCity.php?city=${encodeURIComponent(dbCity)}`
+    );
+    const data = await response.json();
+
+    console.log('LATEST DATA:', data);          // zur Kontrolle
+    const timestamp = data.timestamp;           // z.B. "2025-12-28 15:00:00"
+    console.log('LATEST TIMESTAMP:', timestamp);
+
+    if (data && !data.error) {
+      // 1. Briefmarken anzeigen
+      displayStamps(data);
+
+      // 2. Datum & Zeit aus timestamp holen
+      if (timestamp) {
+        const [dateStr, rawTimeStr] = timestamp.split(' '); // ["2025-12-28", "15:00:00"]
+
+        // --- Datum setzen ---
+        datePicker.value = dateStr;                 // muss im Format YYYY-MM-DD sein
+        datePicker.classList.remove('placeholder');
+
+        // --- Uhrzeit normalisieren ---
+        // rawTimeStr kann z.B. "15:00:00" oder "15:00" oder "15" sein
+        let hourPart = rawTimeStr.split(':')[0];    // nimmt nur die Stunde
+        if (hourPart.length === 1) {
+          hourPart = '0' + hourPart;               // aus "5" wird "05"
+        }
+        const normalizedTime = `${hourPart}:00:00`; // wir bauen "HH:00:00"
+
+        // Prüfen, ob es diese Option im Timepicker wirklich gibt
+        const optionExists = Array.from(timePicker.options).some(
+          (opt) => opt.value === normalizedTime
+        );
+
+        if (optionExists) {
+          timePicker.value = normalizedTime;
+          timePicker.classList.remove('placeholder');
+        } else {
+          console.warn('Keine passende Timepicker-Option für', normalizedTime);
+        }
+      }
+    } else {
+      showError('Keine Daten für diese Stadt verfügbar.');
+    }
+  } catch (error) {
+    console.error('Fehler beim Laden der Daten:', error);
+    showError('Fehler beim Laden der Daten.');
   }
-});
-
-
-
-
-
-// Loading State
-function showLoading() {
-  if (!stampInfoBox) return;
-
-  hasErrorState = false;
-  datePicker.classList.remove('error');
-  timePicker.classList.remove('error');
-
-  stampInfoBox.className = 'stamp-info-box';
-  stampInfoBox.innerHTML = `
-    <strong>Lade Daten...</strong>
-    <p>Bitte einen Moment warten.</p>
-  `;
 }
 
-
-// Error State
-function showError(message) {
-  if (!stampInfoBox) return;
-
-  hasErrorState = true;
-
-  // Date/Time-Felder optisch markieren
-  datePicker.classList.add('error');
-  timePicker.classList.add('error');
-
-  stampInfoBox.className = 'stamp-info-box level-schwer';
-  stampInfoBox.innerHTML = `
-    <strong>Keine Messwerte verfügbar</strong>
-    <p>${message}</p>
-  `;
-}
-
-
-// Datepicker Event Listeners
-datePicker.addEventListener('change', () => {
-  datePicker.classList.remove('placeholder');
-  checkAndLoadData();
-});
-
-timePicker.addEventListener('change', () => {
-  timePicker.classList.remove('placeholder');
-  checkAndLoadData();
-});
 
 async function checkAndLoadData() {
     const date = datePicker.value;
@@ -526,4 +354,189 @@ async function loadDataByDateTime(date, time) {
         showError('Fehler beim Laden der Daten.');
     }
 }
+
+
+// Generiere Uhrzeiten von 00:00 bis 23:00
+function populateTimePicker() {
+    const timePicker = document.getElementById('timePicker');
+    for (let i = 0; i < 24; i++) {
+        const hour = i.toString().padStart(2, '0');
+        const option = document.createElement('option');
+        option.value = `${hour}:00:00`;
+        option.textContent = `${hour}:00`;
+        timePicker.appendChild(option);
+    }
+}
+
+
+//UI Steuerung----------------------------------------------------------------------------
+
+
+async function openPostcard(city, imagePath) {
+    currentCity = city; // Stadt speichern
+    postcardImg.alt = `Postkarte ${city}`;
+    const preloadImg = new Image();
+    preloadImg.src = imagePath;
+    preloadImg.onload = () => {
+        postcardImg.src = imagePath;
+        dialog.showModal();
+    };
+    
+    // Datepicker zurücksetzen
+    datePicker.value = '';
+    timePicker.value = '';
+    resetPickersUI();       
+    
+    // Neueste Daten laden
+    await loadLatestData(city);
+
+    showBackView();
+}
+
+
+Pin_Bern.addEventListener('click', () => {
+  openPostcard('Bern', 'assets/Postkarte_Bern.png');
+});
+
+Pin_Vancouver.addEventListener('click', () => {
+  openPostcard('Vancouver', 'assets/Postkarte_Vancouver.png');
+});
+
+Pin_RiodeJaneiro.addEventListener('click', () => {
+  openPostcard('Rio de Janeiro', 'assets/Postkarte_RiodeJaneiro.png');
+});
+
+Pin_Cairo.addEventListener('click', () => {
+  openPostcard('Kairo', 'assets/Postkarte_Kairo.png');
+});
+
+Pin_Shanghai.addEventListener('click', () => {
+  openPostcard('Shanghai', 'assets/Postkarte_Shanghai.png');
+});
+
+Pin_Melbourne.addEventListener('click', () => {
+  openPostcard('Melbourne', 'assets/Postkarte_Melbourne.png');
+});
+
+
+btn_close.addEventListener('click', function() {
+  dialog.close();
+});
+
+btn_info.addEventListener('click', () => {
+  if (currentView === 'info') {
+    // Info ist offen -> zurück zu letzter Front/Back-Ansicht
+    if (lastNonInfoView === 'front') {
+      showFrontView();
+    } else {
+      showBackView();
+    }
+  } else {
+    // Info ist geschlossen -> merken, welche Ansicht aktiv war, dann Info öffnen
+    lastNonInfoView = currentView;
+    showInfoView();
+  }
+});
+
+
+infoClose.addEventListener('click', () => {
+  // X im Overlay -> zurück zur zuletzt aktiven Front/Back
+  if (lastNonInfoView === 'front') {
+    showFrontView();
+  } else {
+    showBackView();
+  }
+});
+
+// Datepicker Event Listeners
+datePicker.addEventListener('change', () => {
+  datePicker.classList.remove('placeholder');
+  checkAndLoadData();
+});
+
+timePicker.addEventListener('change', () => {
+  timePicker.classList.remove('placeholder');
+  checkAndLoadData();
+});
+
+
+//Klick ausserhalb Info-Box
+document.addEventListener('click', (event) => {
+  if (!stampInfoBox || !stampInfoBox.classList.contains('is-open')) return;
+
+  const clickedInsideInfoBox = stampInfoBox.contains(event.target);
+  const clickedStamp = event.target.closest('.stamp');
+
+  // Klick war weder auf Infobox noch auf Briefmarke
+  if (!clickedInsideInfoBox && !clickedStamp) {
+    stampInfoBox.classList.remove('is-open');
+    setDefaultInfoBox();
+  }
+});
+
+
+//Inititalisierung------------------------------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const pinIds = [
+    "Pin_Vancouver",
+    "Pin_RiodeJaneiro",
+    "Pin_Bern",
+    "Pin_Cairo",
+    "Pin_Shanghai",
+    "Pin_Melbourne"
+  ];
+
+  pinIds.forEach(id => {
+    const pin = document.getElementById(id);
+    if (!pin) return;
+
+    pin.style.transformBox = "fill-box";
+    pin.style.transformOrigin = "center";
+    pin.style.transition = "transform 0.2s ease";
+
+    pin.addEventListener("mouseenter", () => {
+      pin.style.transform = "scale(1.3)";
+    });
+
+    pin.addEventListener("mouseleave", () => {
+      pin.style.transform = "scale(1)";
+    });
+  });
+
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const view = tab.dataset.view; // 'front' oder 'back'
+
+      if (view === 'front') {
+        showFrontView();
+        lastNonInfoView = 'front';
+      } else if (view === 'back') {
+        showBackView();
+        lastNonInfoView = 'back';
+      }
+    });
+  });
+
+
+ populateTimePicker();
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
