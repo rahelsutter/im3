@@ -43,11 +43,6 @@ const Pin_Melbourne = document.querySelector('#Pin_Melbourne');
 const dialog = document.querySelector('#dialog');
 const postcardImg = document.querySelector('#postcard-image');
 const btn_close = document.querySelector('#btn-close');
-const btn_info = document.querySelector('#btn-info');
-const infoClose = document.querySelector('#info-close');
-const tabs = document.querySelectorAll('.popup-tab');
-const postcardFront = document.querySelector('.postcard-front');
-const postcardBack  = document.querySelector('.postcard-back');
 
 
 
