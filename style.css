@@ -492,7 +492,6 @@ main {
   margin-left: 3rem;
 }
 
-
   .worldMapContainer {
     display: flex;
     align-items: center;
@@ -572,6 +571,7 @@ dialog.view-info #info-overlay {
   border: 1px solid transparent;
   cursor: pointer;
   background: transparent;
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 /* aktiver Tab */
@@ -584,9 +584,7 @@ dialog.view-info #info-overlay {
   dialog {
     width: 100vw;
     height: 100vh;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-10%, -10%);
     border-radius: 0;
   }
 
@@ -597,14 +595,6 @@ dialog.view-info #info-overlay {
     padding: 0.5rem 0;
     background: var(--orange);
     color: var(--weiss);
-  }
-
-  .postcard-container {
-    flex-direction: column;
-    width: 100%;
-    height: calc(100% - 80px); /* Platz für Header */
-    padding: 0;
-    gap: 0;
   }
 
   .postcard-front,
