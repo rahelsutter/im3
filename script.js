@@ -362,7 +362,9 @@ function displayStamps(data) {
     });
 
     // CLICK-EVENT (Tablet/Mobile/auch Desktop)
-    stamp.addEventListener('click', () => {
+    stamp.addEventListener('click', (event) => {
+        event.stopPropagation(); 
+
       if (!stampInfoBox || hasErrorState) return;
 
       stampInfoBox.classList.remove('level-unbedenklich', 'level-maessig', 'level-schwer');
@@ -372,7 +374,6 @@ function displayStamps(data) {
       if (levelId === 'schwer')       stampInfoBox.classList.add('level-schwer');
 
       stampInfoBox.innerHTML = `
-        <button id="stamp-info-close" class="stamp-info-close">×</button>
         <strong>${levelTitle}</strong>
         <p>${levelText}</p>
       `;
@@ -386,12 +387,19 @@ function displayStamps(data) {
 }
 
 document.addEventListener('click', (event) => {
-  if (!stampInfoBox) return;
-  const closeBtn = event.target.closest('#stamp-info-close');
-  if (closeBtn) {
+  if (!stampInfoBox || !stampInfoBox.classList.contains('is-open')) return;
+
+  const clickedInsideInfoBox = stampInfoBox.contains(event.target);
+  const clickedStamp = event.target.closest('.stamp');
+
+  // Klick war weder auf Infobox noch auf Briefmarke
+  if (!clickedInsideInfoBox && !clickedStamp) {
     stampInfoBox.classList.remove('is-open');
+    setDefaultInfoBox();
   }
 });
+
+
 
 
 
