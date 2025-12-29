@@ -575,17 +575,12 @@ dialog.view-info #info-overlay {
     transform: none;
   }
 
-
-
-
 .popup-tabs {
   display: flex;
   gap: 8px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   padding: 0 1rem 0.5rem;
 }
-
-
 
 .popup-tab {
   flex: 1;
@@ -606,8 +601,6 @@ dialog.view-info #info-overlay {
   font-weight: 700;
 }
 
- 
-
   .popup-header {
     display: flex;
     flex-direction: column;
@@ -617,9 +610,6 @@ dialog.view-info #info-overlay {
     color: var(--weiss);
   }
 
-
-
-  
   .postcard-front #info-overlay {
     padding-top: 48px; 
   } 
