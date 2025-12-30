@@ -80,7 +80,7 @@ main {
 
 /*PopUp Vorder- und Rückseite Postkarte*/
 dialog {
-    position: absolute;
+    position: fixed;
     width: 90vw;
     height: 90vh;  
     left: 50%;
@@ -88,6 +88,11 @@ dialog {
     transform: translate(-50%, -50%);
     background-color: var(--orange);
     border: none;
+
+      display: flex;
+     flex-direction: column; /* damit Buttons oben und Postcard-Container flexibel darunter liegen */
+     box-sizing: border-box; /* Padding wird in Höhe/Breite einberechnet */
+     padding: 2rem
 }
 
 
@@ -95,7 +100,7 @@ dialog {
 display:flex;
 align-items: center;
 justify-content: space-between;
- padding: 2rem 2rem; 
+ margin-bottom: 1rem; 
 }
 
 
@@ -155,12 +160,13 @@ justify-content: space-between;
 }
 
 .postcard-container {
+  flex:1;
   display: flex;
   align-items: center;      
   justify-content: center;  
-  gap: 10px;               
-  width: 100%;
-  height: 100%;     
+  gap: 10px;  
+  width:100%;
+  overflow:hidden;         
 }
 
 .postcard-front,
