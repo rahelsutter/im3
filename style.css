@@ -555,7 +555,7 @@ main {
   
 #btn-front, 
 #btn-back {
-  display:inline-flex;
+  display:inline-block;
   z-index: 20;
 }
 
@@ -564,7 +564,21 @@ main {
   align-items: center;      
   justify-content: center;  
   gap: 0px;                  
-} */
+} 
+
+.postcard-front,
+  .postcard-back {
+    display: none;
+  }
+
+   .postcard-container.is-front .postcard-front {
+    display: block;
+  }
+
+  .postcard-container.is-back .postcard-back {
+    display: grid; /* wichtig: grid bleibt für stamps */
+  }
+
 
   footer {
   margin-left: 3rem;

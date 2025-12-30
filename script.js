@@ -462,6 +462,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+const postcardContainer = document.querySelector('.postcard-container');
+const btnFront = document.getElementById('btn-front');
+const btnBack  = document.getElementById('btn-back');
+
+btnFront.addEventListener('click', () => {
+  postcardContainer.classList.add('is-front');
+  postcardContainer.classList.remove('is-back');
+});
+
+btnBack.addEventListener('click', () => {
+  postcardContainer.classList.add('is-back');
+  postcardContainer.classList.remove('is-front');
+});
 
 
 
