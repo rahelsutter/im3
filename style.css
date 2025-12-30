@@ -477,6 +477,7 @@ height: 69vh;
     justify-content: flex-start;
     height: auto;
     padding: 3vh 0;
+    overflow-y: auto;
   }
 
 .postcard-back {
