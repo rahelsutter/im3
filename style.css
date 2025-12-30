@@ -88,19 +88,13 @@ dialog {
     transform: translate(-50%, -50%);
     background-color: var(--orange);
     border: none;
-
-      display: flex;
-     flex-direction: column; /* damit Buttons oben und Postcard-Container flexibel darunter liegen */
-     box-sizing: border-box; /* Padding wird in Höhe/Breite einberechnet */
-     padding: 2rem
 }
-
 
 .layout-btns {
 display:flex;
 align-items: center;
 justify-content: space-between;
- margin-bottom: 1rem; 
+margin: 1rem 1rem; 
 }
 
 
@@ -160,13 +154,15 @@ justify-content: space-between;
 }
 
 .postcard-container {
-  flex:1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  align-items: center;      
-  justify-content: center;  
-  gap: 10px;  
-  width:100%;
-  overflow:hidden;         
+  align-items: center;
+  justify-content: center;
+  gap:10px;
 }
 
 .postcard-front,
@@ -567,10 +563,8 @@ main {
   display: flex;
   align-items: center;      
   justify-content: center;  
-  gap: 0px;               
-  width: 100%;
-  height: 100%;     
-}
+  gap: 0px;                  
+} */
 
   footer {
   margin-left: 3rem;

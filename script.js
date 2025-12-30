@@ -1,3 +1,4 @@
+
 let currentCity = '';
 let hasErrorState = false;
 
