@@ -94,12 +94,12 @@ dialog {
 .layout-btns {
 display:flex;
 align-items: center;
-gap: 2rem;
+justify-content: space-between;
+ padding: 2rem 2rem; 
 }
 
 
 #btn-close {
-  position: absolute;
   top: 12px;
   left: 12px;
   z-index: 10;
@@ -121,13 +121,17 @@ gap: 2rem;
   transform: scale(1.05);
 }
 
+
 #btn-front, 
 #btn-back {
  display:none;
+ border: 2px solid var(--schwarz);
+ border-radius: 6px;
+ background: transparent;
+ padding: 0.6em 1.2em;
 }
 
 #btn-info {
-  position: absolute;
   top: 12px;
   right: 12px;
   z-index: 10;
@@ -253,7 +257,7 @@ height: 69vh;
  grid-column: 2 / 4;   /* Spalte 2–3 */
  grid-row: 1;          /* Zeile 1 */
  z-index: 2;
- padding: 10px 10px 30px 10px;
+ padding: 10px 10px 20px 10px;
 }
 
 .date-input, .time-input {
@@ -486,6 +490,7 @@ height: 69vh;
   z-index: 10;
 }
 
+
 #btn-front, 
 #btn-back {
  display:none;
@@ -549,11 +554,7 @@ main {
 #btn-front, 
 #btn-back {
   display:inline-flex;
-  position: absolute;
   z-index: 20;
-  border: 2px solid var(--schwarz);
-  border-radius: 6px;
-  background: transparent;
 }
 
   .postcard-container {
