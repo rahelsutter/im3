@@ -305,23 +305,8 @@ height: 69vh;
 
 /* Fehlerzustand für Date/Time-Felder */
 .date-input.error,
-.time-input.error,
-.mobile-date.error,
-.mobile-hour.error {
+.time-input.error {
  background-color: var(--red);
-}
-
-
-.mobile-date,
-.mobile-hour {
-  display: none;
-  padding: 0px 8px;
-  border: 2px solid var(--schwarz);
-  border-radius: 5px;
-  background-color: var(--beige);
-  font-size: 13px;
-  cursor: pointer;
-  min-width: 110px;
 }
 
 
@@ -625,15 +610,21 @@ main {
     display: grid; /* wichtig: grid bleibt für stamps */
   }
 
+  .datepicker-container {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+
 .date-input,
 .time-input {
-  display: none;
+  display: block;
+  width: 100%;
+  font-size: 16px;          /* wichtig: verhindert iOS-Zoom */
+  padding: 10px 12px;
+  min-height: 44px;         /* Apple Touch Guideline */
+  border-radius: 8px;
 }
 
-.mobile-date,
-.mobile-hour {
-  display: inline-block;
-}
 
   footer {
   margin-left: 3rem;
