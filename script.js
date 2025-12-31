@@ -48,6 +48,31 @@ const btn_info    = document.querySelector('#btn-info');
 const infoOverlay = document.querySelector('#info-overlay');
 const infoClose   = document.querySelector('#info-close');
 
+const postcardFront = document.querySelector('.postcard-front');
+const postcardBack  = document.querySelector('.postcard-back');
+
+
+function isMobileView() {
+  return window.matchMedia('(max-width: 767px)').matches;
+}
+
+function moveInfoOverlayToVisibleSide() {
+  // Desktop/Tablet: immer auf der Vorderseite
+  if (!isMobileView()) {
+    if (infoOverlay.parentElement !== postcardFront) {
+      postcardFront.appendChild(infoOverlay);
+    }
+    return;
+  }
+
+  // Mobile: je nachdem, welche Seite gerade aktiv ist
+  const showFront = postcardContainer.classList.contains('is-front');
+  const target = showFront ? postcardFront : postcardBack;
+
+  if (infoOverlay.parentElement !== target) {
+    target.appendChild(infoOverlay);
+  }
+}
 
 
 function setDefaultInfoBox() {
@@ -389,7 +414,9 @@ btn_close.addEventListener('click', function() {
   dialog.close();
 });
 
+
 btn_info.addEventListener('click', () => {
+  moveInfoOverlayToVisibleSide();
   infoOverlay.style.display = 'block';
 });
 
