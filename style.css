@@ -307,99 +307,12 @@ height: 69vh;
 
 /* Fehlerzustand für Date/Time-Felder */
 .date-input.error,
-.time-input.error,
-.picker-button.error  {
+.time-input.error {
  background-color: var(--red);
 }
 
-/* ===== Mobile Wheel Picker ===== */
-
-.picker-button {
-  display: none; /* default: nicht anzeigen (Desktop/Tablet) */
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  background: #fff;
-  font-size: 14px;
-  text-align: left;
-}
-
-
-/* Modal */
-.wheel-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 9999;
-  padding: 16px;
-}
-
-.wheel-modal.is-open {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.wheel-card {
-  width: 100%;
-  max-width: 480px;
-  background: #fff;
-  border-radius: 16px;
-  padding: 14px;
-}
-
-.wheel-header {
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.wheel-body {
-  display: grid;
-  gap: 10px;
-}
-
-.wheel-row {
-  display: grid;
-  gap: 6px;
-}
-
-.wheel-row select {
-  padding: 10px;
-  font-size: 16px; /* wichtig: größer = bessere Touch Bedienung */
-  border-radius: 10px;
-  border: 2px solid #ccc;
-}
-
-.wheel-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.wheel-btn {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 2px solid #ccc;
-  background: #fff;
-  font-size: 14px;
-}
-
-.wheel-btn.primary {
-  border-color: #111;
-  font-weight: 700;
-}
-
-
-
-
-
-
 /* Einzelne Briefmarke */
 .stamp {
-    position: relative;
     width: 88%;
     height: 88%;
     max-width: 9.5rem;
@@ -413,7 +326,6 @@ height: 69vh;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 5;
 }
 
 
@@ -500,7 +412,6 @@ height: 69vh;
 }
 
 .stamp-info-box {
-  position: relative;
   grid-column: 2 / 4;  
   grid-row: 3 / 5;      
   align-self: center;
@@ -511,7 +422,6 @@ height: 69vh;
   max-height: 150px;
   padding: 0.75rem 0.9rem;
   border-radius: 8px;
-  z-index: 6;
 }
 
 /* Texte innerhalb der Box */
@@ -690,12 +600,7 @@ main {
     height: auto;
     aspect-ratio: 2 / 3;          /* Postkartenverhältnis */
     
-  }
-
-  .postcard-back {
-    grid-template-rows: 70px repeat(5, 1fr);
-  }
-  
+  } 
 
    .postcard-container.is-front .postcard-front {
     display: block;
@@ -704,30 +609,6 @@ main {
   .postcard-container.is-back .postcard-back {
     display: grid; /* wichtig: grid bleibt für stamps */
   }
-
-  .datepicker-container {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 8px 10px 8px 10px;
-    pointer-events: auto;
-  }
-
-/* timepicker */
-  .date-input,
-  .time-input {
-    display: none; 
-  }
-
-  .picker-button {
-    display: block; /* Button sichtbar */
-    width: auto;
-    max-width: 220px;
-  }
-
-
-
 
 
   footer {

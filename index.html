@@ -664,53 +664,11 @@
   
 
 <div class="datepicker-container">
-  <!-- Desktop/Tablet: bleibt wie bisher -->
   <input type="date" id="datePicker" class="date-input">
   <select id="timePicker" class="time-input">
     <option value="">Uhrzeit wählen</option>
   </select>
-
-  <!-- Mobile: Button öffnet Wheel-Modal -->
-  <button type="button" id="pickerButton" class="picker-button">
-    Datum & Uhrzeit wählen
-  </button>
 </div>
-  <!-- Wheel-Modal (nur Mobile sichtbar) -->
-  <div id="wheelModal" class="wheel-modal" aria-hidden="true">
-    <div class="wheel-card">
-      <div class="wheel-header">Datum & Uhrzeit</div>
-
-      <div class="wheel-body">
-        <div class="wheel-row">
-          <label for="wheelDay">Tag</label>
-          <select id="wheelDay"></select>
-        </div>
-
-        <div class="wheel-row">
-          <label for="wheelMonth">Monat</label>
-          <select id="wheelMonth"></select>
-        </div>
-
-        <div class="wheel-row">
-          <label for="wheelYear">Jahr</label>
-          <select id="wheelYear"></select>
-        </div>
-
-        <div class="wheel-row">
-          <label for="wheelHour">Uhrzeit</label>
-          <select id="wheelHour"></select>
-        </div>
-      </div>
-
-      <div class="wheel-actions">
-        <button type="button" id="wheelCancel" class="wheel-btn">Abbrechen</button>
-        <button type="button" id="wheelOk" class="wheel-btn primary">OK</button>
-      </div>
-    </div>
-  </div>
-
-
-
 
   
            <div id="stamp-info-box">
@@ -730,4 +688,4 @@
 
 </body>
 
-</html>
+</html>  
