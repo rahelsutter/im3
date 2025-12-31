@@ -51,6 +51,17 @@ const infoClose   = document.querySelector('#info-close');
 const postcardFront = document.querySelector('.postcard-front');
 const postcardBack  = document.querySelector('.postcard-back');
 
+// Mobile Wheel Picker Elemente
+const pickerButton = document.getElementById('pickerButton');
+const wheelModal   = document.getElementById('wheelModal');
+const wheelDay     = document.getElementById('wheelDay');
+const wheelMonth   = document.getElementById('wheelMonth');
+const wheelYear    = document.getElementById('wheelYear');
+const wheelHour    = document.getElementById('wheelHour');
+const wheelCancel  = document.getElementById('wheelCancel');
+const wheelOk      = document.getElementById('wheelOk');
+
+
 
 function isMobileView() {
   return window.matchMedia('(max-width: 767px)').matches;
@@ -74,6 +85,126 @@ function moveInfoOverlayToVisibleSide() {
   }
 }
 
+function pad2(n) {
+  return String(n).padStart(2, '0');
+}
+
+function daysInMonth(year, month) {
+  // month: 1-12
+  return new Date(year, month, 0).getDate();
+}
+
+function openWheel() {
+  if (!wheelModal) return;
+  fillWheelFromCurrentInputs();
+  wheelModal.classList.add('is-open');
+  wheelModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeWheel() {
+  if (!wheelModal) return;
+  wheelModal.classList.remove('is-open');
+  wheelModal.setAttribute('aria-hidden', 'true');
+}
+
+function setPickerButtonTextFromInputs() {
+  if (!pickerButton) return;
+
+  const d = datePicker.value;     // "YYYY-MM-DD"
+  const t = timePicker.value;     // "HH:00:00"
+  if (d && t) {
+    pickerButton.textContent = `${d} – ${t.slice(0,5)}`;
+  } else if (d && !t) {
+    pickerButton.textContent = `${d} – Uhrzeit wählen`;
+  } else {
+    pickerButton.textContent = `Datum & Uhrzeit wählen`;
+  }
+}
+
+function ensureWheelBaseOptions() {
+  // Jahre: z.B. aktuelles Jahr +/- 2
+  wheelYear.innerHTML = '';
+  const nowYear = new Date().getFullYear();
+  for (let y = nowYear - 2; y <= nowYear + 2; y++) {
+    const opt = document.createElement('option');
+    opt.value = String(y);
+    opt.textContent = String(y);
+    wheelYear.appendChild(opt);
+  }
+
+  // Monate 1-12
+  wheelMonth.innerHTML = '';
+  for (let m = 1; m <= 12; m++) {
+    const opt = document.createElement('option');
+    opt.value = String(m);
+    opt.textContent = pad2(m);
+    wheelMonth.appendChild(opt);
+  }
+
+  // Stunden 0-23 (wir bleiben bei deinem Stunden-Picker)
+  wheelHour.innerHTML = '';
+  for (let h = 0; h < 24; h++) {
+    const opt = document.createElement('option');
+    opt.value = String(h);
+    opt.textContent = `${pad2(h)}:00`;
+    wheelHour.appendChild(opt);
+  }
+}
+
+function rebuildWheelDays() {
+  const y = parseInt(wheelYear.value, 10);
+  const m = parseInt(wheelMonth.value, 10);
+
+  const maxD = daysInMonth(y, m);
+  const current = wheelDay.value ? parseInt(wheelDay.value, 10) : 1;
+
+  wheelDay.innerHTML = '';
+  for (let d = 1; d <= maxD; d++) {
+    const opt = document.createElement('option');
+    opt.value = String(d);
+    opt.textContent = pad2(d);
+    wheelDay.appendChild(opt);
+  }
+
+  // Tag möglichst erhalten
+  wheelDay.value = String(Math.min(current, maxD));
+}
+
+function fillWheelFromCurrentInputs() {
+  ensureWheelBaseOptions();
+
+  // Falls Inputs schon Werte haben (z.B. “latest timestamp”), übernehmen wir die
+  // sonst nehmen wir "heute" als Default
+  let y, m, d, h;
+
+  if (datePicker.value) {
+    const [yy, mm, dd] = datePicker.value.split('-');
+    y = parseInt(yy, 10);
+    m = parseInt(mm, 10);
+    d = parseInt(dd, 10);
+  } else {
+    const now = new Date();
+    y = now.getFullYear();
+    m = now.getMonth() + 1;
+    d = now.getDate();
+  }
+
+  if (timePicker.value) {
+    h = parseInt(timePicker.value.split(':')[0], 10);
+  } else {
+    h = 12; // neutraler default, wird eh meist überschrieben durch latest
+  }
+
+  wheelYear.value = String(y);
+  wheelMonth.value = String(m);
+  rebuildWheelDays();
+  wheelDay.value = String(d);
+  wheelHour.value = String(h);
+}
+
+
+
+
 
 function setDefaultInfoBox() {
   if (!stampInfoBox) return;
@@ -90,6 +221,8 @@ function resetPickersUI() {
 
   datePicker.classList.add('placeholder');
   timePicker.classList.add('placeholder');
+  setPickerButtonTextFromInputs();
+
 }
 
 
@@ -101,6 +234,8 @@ function showLoading() {
   hasErrorState = false;
   datePicker.classList.remove('error');
   timePicker.classList.remove('error');
+  if (pickerButton) pickerButton.classList.remove('error');
+
 
   stampInfoBox.className = 'stamp-info-box';
   stampInfoBox.innerHTML = `
@@ -119,6 +254,8 @@ function showError(message) {
   // Date/Time-Felder optisch markieren
   datePicker.classList.add('error');
   timePicker.classList.add('error');
+  if (pickerButton) pickerButton.classList.add('error');
+
 
   stampInfoBox.className = 'stamp-info-box level-schwer';
   stampInfoBox.innerHTML = `
@@ -381,6 +518,8 @@ async function openPostcard(city, imagePath) {
     
     // Neueste Daten laden
     await loadLatestData(city);
+    setPickerButtonTextFromInputs();
+
 
 }
 
@@ -425,16 +564,91 @@ infoClose.addEventListener('click', () => {
 });
 
 
-// Datepicker Event Listeners
 datePicker.addEventListener('change', () => {
   datePicker.classList.remove('placeholder');
+  setPickerButtonTextFromInputs();
   checkAndLoadData();
 });
 
 timePicker.addEventListener('change', () => {
   timePicker.classList.remove('placeholder');
+  setPickerButtonTextFromInputs();
   checkAndLoadData();
 });
+
+
+//Date Wheel
+// Mobile: Button öffnet Wheel
+if (pickerButton) {
+  pickerButton.addEventListener('click', () => {
+    if (!isMobileView()) return; // auf Desktop/Tablet nicht nötig
+    openWheel();
+  });
+}
+
+// Änderungen von Monat/Jahr -> Tage neu berechnen
+if (wheelYear && wheelMonth) {
+  wheelYear.addEventListener('change', rebuildWheelDays);
+  wheelMonth.addEventListener('change', rebuildWheelDays);
+}
+
+// Abbrechen / OK
+if (wheelCancel) {
+  wheelCancel.addEventListener('click', closeWheel);
+}
+
+if (wheelOk) {
+  wheelOk.addEventListener('click', () => {
+    // Werte aus Wheel bauen
+    const y = wheelYear.value;
+    const m = pad2(wheelMonth.value);
+    const d = pad2(wheelDay.value);
+    const h = pad2(wheelHour.value);
+
+    // In deine EXISTIERENDEN Inputs schreiben (damit alles gleich bleibt!)
+    datePicker.value = `${y}-${m}-${d}`;
+    timePicker.value = `${h}:00:00`;
+
+    datePicker.classList.remove('placeholder');
+    timePicker.classList.remove('placeholder');
+
+    // Event auslösen, damit deine bestehende Logik läuft
+    datePicker.dispatchEvent(new Event('change', { bubbles: true }));
+    timePicker.dispatchEvent(new Event('change', { bubbles: true }));
+
+    closeWheel();
+  });
+}
+
+// Klick auf Hintergrund schließt Modal
+if (wheelModal) {
+  wheelModal.addEventListener('click', (e) => {
+    if (e.target === wheelModal) closeWheel();
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Klick ausserhalb Info-Box
