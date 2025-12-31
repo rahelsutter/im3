@@ -281,6 +281,8 @@ height: 69vh;
  padding: 10px 10px 20px 10px;
 }
 
+
+
 .date-input, .time-input {
     padding: 0px 8px;
     border: 2px solid var(--schwarz);
@@ -305,7 +307,8 @@ height: 69vh;
 
 /* Fehlerzustand für Date/Time-Felder */
 .date-input.error,
-.time-input.error {
+.time-input.error,
+.picker-button.error  {
  background-color: var(--red);
 }
 
@@ -322,10 +325,6 @@ height: 69vh;
   text-align: left;
 }
 
-/* gleiche rote Fehlermarkierung wie deine Inputs */
-.picker-button.error {
-  border-color: #c93b3b;
-}
 
 /* Modal */
 .wheel-modal {
@@ -398,26 +397,9 @@ height: 69vh;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Einzelne Briefmarke */
 .stamp {
+    position: relative;
     width: 88%;
     height: 88%;
     max-width: 9.5rem;
@@ -431,6 +413,7 @@ height: 69vh;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    z-index: 5;
 }
 
 
@@ -517,6 +500,7 @@ height: 69vh;
 }
 
 .stamp-info-box {
+  position: relative;
   grid-column: 2 / 4;  
   grid-row: 3 / 5;      
   align-self: center;
@@ -527,7 +511,7 @@ height: 69vh;
   max-height: 150px;
   padding: 0.75rem 0.9rem;
   border-radius: 8px;
-
+  z-index: 6;
 }
 
 /* Texte innerhalb der Box */
@@ -708,6 +692,11 @@ main {
     
   }
 
+  .postcard-back {
+    grid-template-rows: 70px repeat(5, 1fr);
+  }
+  
+
    .postcard-container.is-front .postcard-front {
     display: block;
   }
@@ -716,6 +705,14 @@ main {
     display: grid; /* wichtig: grid bleibt für stamps */
   }
 
+  .datepicker-container {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 10px 8px 10px;
+    pointer-events: auto;
+  }
 
 /* timepicker */
   .date-input,
@@ -725,6 +722,8 @@ main {
 
   .picker-button {
     display: block; /* Button sichtbar */
+    width: auto;
+    max-width: 220px;
   }
 
 
