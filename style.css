@@ -128,8 +128,25 @@ margin: 1rem 1rem;
  border: 2px solid var(--beige);
  border-radius: 6px;
  background: transparent;
- padding: 0.6em 1.2em;
+ font-size: 0.85rem;
+  line-height: 1;
+  padding: 0.35rem 0.6rem;
 }
+
+/* aktiver Umschalt-Button */
+.layout-btns button.is-active {
+  background-color: var(--beige);
+  color: var(--orange);
+  border-color: var(--beige);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  transform: translateY(-1px);
+}
+
+.layout-btns button:active {
+  transform: translateY(0px);
+}
+
+
 
 #btn-info {
   top: 12px;
@@ -438,6 +455,7 @@ height: 69vh;
   color: grey; 
  }
 
+
  /*--------------------------------------------------------------------Tablet-Ansicht-------------------------------------------------------*/
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -552,10 +570,13 @@ main {
     opacity: 1;          
   }
 
+  
  dialog {
-    position: fixed;              
+    position: fixed;          
     width: 100vw;
     height: 100vh;
+    padding: 16px;
+    background: var(--orange);
   }
   
 #btn-front, 
@@ -564,16 +585,20 @@ main {
   z-index: 20;
 }
 
-  .postcard-container {
-  display: flex;
-  align-items: center;      
-  justify-content: center;  
-  gap: 0px;                  
-} 
+.postcard-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+  }
 
 .postcard-front,
   .postcard-back {
     display: none;
+    width: min(86vw, 420px);      /* passt in die Breite */
+    height: auto;
+    aspect-ratio: 2 / 3;          /* Postkartenverhältnis */
+    
   }
 
    .postcard-container.is-front .postcard-front {

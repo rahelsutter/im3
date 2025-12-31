@@ -462,19 +462,32 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-const postcardContainer = document.querySelector('.postcard-container');
 const btnFront = document.getElementById('btn-front');
 const btnBack  = document.getElementById('btn-back');
+const postcardContainer = document.querySelector('.postcard-container');
+
+function setActiveButton(active) {
+  btnFront.classList.toggle('is-active', active === 'front');
+  btnBack.classList.toggle('is-active', active === 'back');
+}
 
 btnFront.addEventListener('click', () => {
   postcardContainer.classList.add('is-front');
   postcardContainer.classList.remove('is-back');
+  setActiveButton('front');
 });
 
 btnBack.addEventListener('click', () => {
   postcardContainer.classList.add('is-back');
   postcardContainer.classList.remove('is-front');
+  setActiveButton('back');
 });
+
+// z. B. Rückseite zuerst
+postcardContainer.classList.add('is-back');
+postcardContainer.classList.remove('is-front');
+setActiveButton('back');
+
 
 
 
