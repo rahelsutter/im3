@@ -136,7 +136,7 @@ function getLevelText(key, value) {
   if (key === 'pm2_5') {
     if (v <= 15) return ['unbedenklich','Unbedenklich 0–15 μg/m³','Die Luft ist sauber. Es hat kaum Feinstaubpartikel. Atmen ist unproblematisch für alle.'];
     if (v <= 25) return ['maessig','Mässig 16–25 μg/m³','Es gibt etwas Feinstaub in der Luft. Empfindliche Personen sollten vorsichtiger sein.'];
-    return ['schwer','Schwer >25 μg/m³','Hohe Feinstaubbelastung! Aufenthalte im Freien möglichst vermeiden.'];
+    return ['schwer','Schwer >25 μg/m³','Hohe Feinstaubbelastung! Atemschutz verwenden oder Aufenthalte im Freien möglichst vermeiden.'];
   }
 
   if (key === 'dust') {
@@ -148,7 +148,7 @@ function getLevelText(key, value) {
   if (key === 'carbon_monoxide') {
     if (v <= 1000) return ['unbedenklich','Unbedenklich 0–1000 μg/m³','Die Luft ist sicher. Kohlenmonoxid liegt weit unter gesundheitsschädlichen Werten.'];
     if (v <= 4000) return ['maessig','Mässig 1001–4000 μg/m³','Kohlenmonoxid ist erhöht. Empfindliche Personen sollten Belastungen reduzieren.'];
-    return ['schwer','Schwer >4000 μg/m³','Achtung! Hoher CO‑Gehalt. Längere Einwirkung kann gefährlich sein.'];
+    return ['schwer','Schwer >4000 μg/m³','Achtung! Hoher CO‑Gehalt. Längere Einwirkung kann sehr gefährlich sein.'];
   }
 
   if (key === 'nitrogen_dioxide') {
