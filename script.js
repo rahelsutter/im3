@@ -32,7 +32,10 @@ const cityMapping = {
 const stampsGrid = document.querySelector('.postcard-back');
 const datePicker = document.getElementById('datePicker');
 const timePicker = document.getElementById('timePicker');
+const mobileDate = document.getElementById('mobileDate');
+const mobileHour = document.getElementById('mobileHour');
 const stampInfoBox = document.getElementById('stamp-info-box');
+
 
 const Pin_Bern = document.querySelector('#Pin_Bern');
 const Pin_Cairo = document.querySelector('#Pin_Cairo');
@@ -74,6 +77,61 @@ function moveInfoOverlayToVisibleSide() {
     target.appendChild(infoOverlay);
   }
 }
+
+
+function pad2(n) {
+  return String(n).padStart(2, '0');
+}
+
+function populateMobileHour() {
+  if (!mobileHour) return;
+  mobileHour.innerHTML = '<option value="">Uhrzeit wählen</option>';
+
+  for (let h = 0; h < 24; h++) {
+    const opt = document.createElement('option');
+    opt.value = `${pad2(h)}:00:00`;
+    opt.textContent = `${pad2(h)}:00`;
+    mobileHour.appendChild(opt);
+  }
+}
+
+// füllt Datumsliste z.B. letzten 14 Tage + nächsten 2 Tage (kannst du ändern)
+function populateMobileDates(baseDateStr) {
+  if (!mobileDate) return;
+
+  const base = baseDateStr ? new Date(baseDateStr) : new Date();
+
+  const daysBack = 14;
+  const daysForward = 2;
+
+  mobileDate.innerHTML = '';
+
+  for (let i = -daysBack; i <= daysForward; i++) {
+    const d = new Date(base);
+    d.setDate(base.getDate() + i);
+
+    const yyyy = d.getFullYear();
+    const mm = pad2(d.getMonth() + 1);
+    const dd = pad2(d.getDate());
+
+    const value = `${yyyy}-${mm}-${dd}`;
+
+    const opt = document.createElement('option');
+    opt.value = value;
+    opt.textContent = value; // du kannst hier auch "dd.mm.yyyy" anzeigen
+    mobileDate.appendChild(opt);
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
