@@ -22,6 +22,7 @@ __Beim Deployment traten 404‑Fehler auf, weil der assets‑Ordner zunächst ni
 
 **Sonstige Anmerkungen**
 __Wir entschieden uns in der mobilen Ansicht doch nicht einfach eine scrollbare Version zu gestalten, sondern gestalteten die Tabs Front und Back – Ansicht Vorder‑ und Rückseite separat, da wir diese Version als handlicher und schöner empfanden fürs mobile Design.__
+__Wir entschieden uns das Info-Overlay, welches sich beim Klicken auf den Info-Button oben rechts im Popup öffnet, mit einem X Button zu versehen zur Schliessung. Wir fanden es handlicher, nach dem man auf der linken Seite scrollte, als wieder auf den Info-Button zu klicken.__
 
 **Genutzte Ressourcen**
 __Dokumentation und Beispiele zu HTML, CSS (Flexbox, Grid, transform) und JavaScript für DOM‑Manipulation und Fetch‑Requests.__
