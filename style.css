@@ -407,14 +407,15 @@ height: 69vh;
 
 .stamp-info-box {
   grid-column: 2 / 4;  
-  grid-row: 3 / 5;      
+  grid-row: 3 / 5;
+
   align-self: center;
   justify-self: center;
   grid-template-rows: 
   minmax(60px, auto)
   minmax(60px, auto)
   1fr
-  1fr;
+  1fr; 
   width: 100%;
   max-width: 220px;
   min-height: 100px;
@@ -629,6 +630,10 @@ main {
   border-radius: 8px;
 }
 
+
+.stamp-info-box {
+  max-height: 120px;
+ }  
 
   footer {
   margin-left: 3rem;
