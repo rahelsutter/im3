@@ -312,8 +312,6 @@ height: 69vh;
 .stamp {
     width: 88%;
     height: 88%;
-    max-width: 9.5rem;
-    max-height: 9.5rem;
     position: relative;
     max-width: clamp(3.5rem, 22vw, 9.5rem);
     max-height: clamp(3.5rem, 22vw, 9.5rem);
@@ -488,6 +486,7 @@ height: 69vh;
     overflow-y: auto;
   }
 
+
 .postcard-back {
   padding: 1.5vh 3vw;
 }
@@ -553,39 +552,39 @@ main {
     position: fixed;          
     width: 100vw;
     height: 100vh;
-    padding: 16px;
+    padding: 16px;    
     background: var(--orange);
   }
 
   .dialog-inner {
-
-  display: grid;
+    position: relative;
+    display: grid;
     grid-template-rows: auto 1fr;
-    gap: 12px;
+    gap: 8px;
     height: 100%;
   }
   
 #btn-front, 
 #btn-back {
   display:inline-block;
-  z-index: 20;
+  z-index: 1;
 }
+
+.layout-btns {
+  grid-row: 1;
+  margin: 0;
+ }
 
 .postcard-container {
     width: 100%;
-    height: 100%;
+    height: auto;
      min-height: 0;
     grid-row: 2;     
     display: grid;
     place-items: center;
     
   }
- .layout-btns {
-  grid-row: 1;
-  margin: 0;
- }
-
-
+ 
 .postcard-front,
 .postcard-back {
     display: none;
@@ -593,6 +592,7 @@ main {
     height: auto;
     max-height: 100%;
     aspect-ratio: 2 / 3;      
+    transform: translateY(0); 
   } 
 
    .postcard-container.is-front .postcard-front {
