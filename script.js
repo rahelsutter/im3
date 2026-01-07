@@ -29,6 +29,9 @@ const cityMapping = {
 };
 
 
+
+
+
 const stampsGrid = document.querySelector('.postcard-back');
 const datePicker = document.getElementById('datePicker');
 const timePicker = document.getElementById('timePicker');
@@ -49,17 +52,26 @@ const btn_info    = document.querySelector('#btn-info');
 const infoOverlay = document.querySelector('#info-overlay');
 const infoClose   = document.querySelector('#info-close');
 
+const postcardContainer = document.querySelector('.postcard-container');
 const postcardFront = document.querySelector('.postcard-front');
 const postcardBack  = document.querySelector('.postcard-back');
 
+const btnFront = document.getElementById('btn-front');
+const btnBack  = document.getElementById('btn-back');
 
 
+
+
+
+
+
+//Front & Back Mobile
 function isMobileView() {
   return window.matchMedia('(max-width: 767px)').matches;
 }
 
+
 function moveInfoOverlayToVisibleSide() {
-  // Desktop/Tablet: immer auf der Vorderseite
   if (!isMobileView()) {
     if (infoOverlay.parentElement !== postcardFront) {
       postcardFront.appendChild(infoOverlay);
@@ -67,7 +79,6 @@ function moveInfoOverlayToVisibleSide() {
     return;
   }
 
-  // Mobile: je nachdem, welche Seite gerade aktiv ist
   const showFront = postcardContainer.classList.contains('is-front');
   const target = showFront ? postcardFront : postcardBack;
 
@@ -77,15 +88,39 @@ function moveInfoOverlayToVisibleSide() {
 }
 
 
+//Info-Box
+function getDefaultStampHintText() {
+  const isTouchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  if (isTouchLike) {
+    return {
+      title: 'Tippe auf eine Briefmarke.',
+      text: 'Hier erscheint dann die Einschätzung zum Wert.'
+    };
+  }
+
+  return {
+    title: 'Fahre mit der Maus über eine Briefmarke.',
+    text: 'Hier erscheint dann die Einschätzung zum Wert.'
+  };
+}
+
+
+
 function setDefaultInfoBox() {
   if (!stampInfoBox) return;
+
+  const hint = getDefaultStampHintText();
+
   stampInfoBox.className = 'stamp-info-box';
   stampInfoBox.innerHTML = `
-    <strong>Fahre mit der Maus über eine Briefmarke.</strong>
-    <p>Hier erscheint dann die Einschätzung zum Wert.</p>
+    <strong>${hint.title}</strong>
+    <p>${hint.text}</p>
   `;
 }
 
+
+//Reset Datepicker
 function resetPickersUI() {
   datePicker.value = '';
   timePicker.value = '';
@@ -121,7 +156,6 @@ function showError(message) {
 
   hasErrorState = true;
 
-  // Date/Time-Felder optisch markieren
   datePicker.classList.add('error');
   timePicker.classList.add('error');
 
@@ -133,6 +167,14 @@ function showError(message) {
     <p>${message}</p>
   `;
 }
+
+//Front & Back BTN hervorheben
+function setActiveButton(active) {
+  btnFront.classList.toggle('is-active', active === 'front');
+  btnBack.classList.toggle('is-active', active === 'back');
+}
+
+
 
 
 // Daten-Funktionen (API & Datenverarbeitung)-------------------------------------------------------------------------------------------------------------------
@@ -193,7 +235,8 @@ function displayStamps(data) {
   timePicker.classList.remove('error');
 
 
-  setDefaultInfoBox();  // Standardtext setzen
+  // Standardtext setzen Info-Box
+  setDefaultInfoBox();  
 
   stampOrder.forEach(key => {
     const config = stampMapping[key];
@@ -232,7 +275,7 @@ function displayStamps(data) {
       setDefaultInfoBox();
     });
 
-    // CLICK-EVENT (Tablet/Mobile/auch Desktop)
+    // CLICK-EVENT (Tablet/Mobile)
     stamp.addEventListener('click', (event) => {
         event.stopPropagation(); 
 
@@ -258,7 +301,7 @@ function displayStamps(data) {
 }
 
 
-// Neueste Daten laden
+//Aktuelleste Daten laden
 async function loadLatestData(city) {
   showLoading();
   const dbCity = cityMapping[city];
@@ -373,7 +416,7 @@ function populateTimePicker() {
 
 
 async function openPostcard(city, imagePath) {
-    currentCity = city; // Stadt speichern
+    currentCity = city; 
     postcardImg.alt = `Postkarte ${city}`;
     const preloadImg = new Image();
     preloadImg.src = imagePath;
@@ -382,12 +425,10 @@ async function openPostcard(city, imagePath) {
         dialog.showModal();
     };
     
-    // Datepicker zurücksetzen
     datePicker.value = '';
     timePicker.value = '';
     resetPickersUI();       
-    
-    // Neueste Daten laden
+ 
     await loadLatestData(city);
 
 }
@@ -460,6 +501,24 @@ document.addEventListener('click', (event) => {
 });
 
 
+//Front & Back BTN
+btnFront.addEventListener('click', () => {
+  postcardContainer.classList.add('is-front');
+  postcardContainer.classList.remove('is-back');
+  setActiveButton('front');
+});
+
+btnBack.addEventListener('click', () => {
+  postcardContainer.classList.add('is-back');
+  postcardContainer.classList.remove('is-front');
+  setActiveButton('back');
+});
+
+// z. B. Rückseite zuerst
+postcardContainer.classList.add('is-back');
+postcardContainer.classList.remove('is-front');
+setActiveButton('back');
+
 
 //Inititalisierung------------------------------------------------------------------------------------
 
@@ -498,31 +557,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-const btnFront = document.getElementById('btn-front');
-const btnBack  = document.getElementById('btn-back');
-const postcardContainer = document.querySelector('.postcard-container');
 
-function setActiveButton(active) {
-  btnFront.classList.toggle('is-active', active === 'front');
-  btnBack.classList.toggle('is-active', active === 'back');
-}
 
-btnFront.addEventListener('click', () => {
-  postcardContainer.classList.add('is-front');
-  postcardContainer.classList.remove('is-back');
-  setActiveButton('front');
-});
 
-btnBack.addEventListener('click', () => {
-  postcardContainer.classList.add('is-back');
-  postcardContainer.classList.remove('is-front');
-  setActiveButton('back');
-});
-
-// z. B. Rückseite zuerst
-postcardContainer.classList.add('is-back');
-postcardContainer.classList.remove('is-front');
-setActiveButton('back');
 
 
 

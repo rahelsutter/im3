@@ -11,7 +11,7 @@ Kurze Erklärung zur URL: Ich habe im zweiten Semester meine Domain nach dem Nam
 **Learnings**
 __Vertieftes Verständnis für das Zusammenspiel von Frontend (HTML, CSS, JavaScript) und Backend‑APIs (PHP) beim Laden und Aufbereiten von Messdaten.__
 __Umgang mit dynamischen UI‑Elementen wie Dialogen, Date‑ und Timepicker sowie dem Nachladen von Daten abhängig von User‑Eingaben.__
-__Feinjustierung von Layouts mit Flexbox, Grid und transform‑Eigenschaften, um ein pixelgenaues Design zu erreichen.__
+__Feinjustierung von Layouts mit Flexbox, Grid und transform‑Eigenschaften, um ein responsive Design zu erreichen.__
 __Umgang mit Deployment‑Themen (Ordnerstruktur, relative Pfade, 404‑Fehler bei Assets, Unterschiede zwischen lokaler Umgebung und Live‑Server).__
 
 **Schwierigkeiten / Herausforderungen**
@@ -19,6 +19,9 @@ __Die Integration der Daten ins Frontend war anfangs schwer umzusetzen mit unser
 __Die präzise Platzierung der Stamps und des Info‑Popups war anspruchsvoll, da sich Elemente durch Änderungen an Grösse und Layout leicht verschoben haben und das Design sehr spezifische Anforderungen hatte.__
 __Das responsive Verhalten der Postkarte (Breite/Höhe, Skalierung der Rückseite, Position der Textbox) erforderte viele Iterationsschritte und Tests, bis alles auf verschiedenen Bildschirmgrössen stimmig aussah.__
 __Beim Deployment traten 404‑Fehler auf, weil der assets‑Ordner zunächst nicht korrekt auf den Server hochgeladen war; dadurch wurden Bilder und SVGs nicht geladen und die Interaktion wirkte „kaputt“.__
+
+**Sonstige Anmerkungen**
+__Wir entschieden uns in der mobilen Ansicht doch nicht einfach eine scrollbare Version zu gestalten, sondern gestalteten die Tabs Front und Back – Ansicht Vorder‑ und Rückseite separat, da wir diese Version als handlicher und schöner empfanden fürs mobile Design.__
 
 **Genutzte Ressourcen**
 __Dokumentation und Beispiele zu HTML, CSS (Flexbox, Grid, transform) und JavaScript für DOM‑Manipulation und Fetch‑Requests.__

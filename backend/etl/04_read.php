@@ -20,11 +20,9 @@ try {
     $stmt->execute([$city]);
     $values = $stmt->fetch();
 
-    // Was tun, wenns keine Resultate gibt?
     print json_encode($values);
 
 } catch (PDOException $e) {
 
-    // Todo: Ist kein JSON. Was geschieht im Frontend?
     die("Verbindung zur Datenbank konnte nicht hergestellt werden: " . $e->getMessage());
 }

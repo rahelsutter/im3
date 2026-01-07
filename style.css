@@ -398,13 +398,6 @@ height: 69vh;
 }
 
 
-
-.stamps-grid.loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .stamp-info-box {
   grid-column: 2 / 4;  
   grid-row: 3 / 5;
@@ -461,15 +454,6 @@ height: 69vh;
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
-  .worldMapContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--blue);
-    border-top-left-radius: 30px;
-    height: 100%;
-    overflow: hidden;         
-  }
 
   .worldMapScroll {
     overflow-x: auto;          
@@ -517,18 +501,15 @@ height: 69vh;
 }
 
 
-#btn-front, 
-#btn-back {
- display:none;
-}
-
 #btn-info {
   position: absolute;
   top: 2vh;
   right: 3vw;
   z-index: 10;
 }
-
+.stamp-info-box {
+  font-size: 0.85rem;
+ }  
 
 
 }
@@ -541,16 +522,6 @@ height: 69vh;
 main {
   margin-left: 3rem;
 }
-
-  .worldMapContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--blue);
-    border-top-left-radius: 30px;
-    height: 100%;
-    overflow: hidden;         
-  }
 
   .worldMapScroll {
     overflow-x: auto;          
@@ -607,7 +578,7 @@ main {
 
 
 .postcard-front,
-  .postcard-back {
+.postcard-back {
     display: none;
     width: min(86vw, 420px);      
     height: auto;
@@ -635,7 +606,7 @@ main {
   display: block;
   width: 100%;
   font-size: 16px;          /* wichtig: verhindert iOS-Zoom */
-  padding: 0;
+  padding: 0px 4px;
   min-height: 30px;         /* Apple Touch Guideline */
   border-radius: 8px;
 }
@@ -643,7 +614,7 @@ main {
 
 .stamp-info-box {
   max-height: 110px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
  }  
 
   footer {
