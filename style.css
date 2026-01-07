@@ -398,6 +398,11 @@ height: 69vh;
 }
 
 
+.postcard-back.loading {
+  display: grid;              
+  place-items: center;
+}
+
 .stamp-info-box {
   grid-column: 2 / 4;  
   grid-row: 3 / 5;
@@ -550,10 +555,14 @@ main {
     height: 100vh;
     padding: 16px;
     background: var(--orange);
+  }
 
-    display: grid;
+  .dialog-inner {
+
+  display: grid;
     grid-template-rows: auto 1fr;
     gap: 12px;
+    height: 100%;
   }
   
 #btn-front, 
@@ -583,9 +592,7 @@ main {
     width: min(86vw, 420px);      
     height: auto;
     max-height: 100%;
-    aspect-ratio: 2 / 3;  
-       
-    
+    aspect-ratio: 2 / 3;      
   } 
 
    .postcard-container.is-front .postcard-front {
