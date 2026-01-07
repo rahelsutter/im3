@@ -129,7 +129,8 @@ margin: 1rem 1rem;
  background: transparent;
  font-size: 0.85rem;
  line-height: 1;
- padding: 1rem 2rem;
+ width: 6rem;
+ height: 3rem;
 }
 
 .layout-btns #btn-front.is-active,
@@ -409,12 +410,18 @@ height: 69vh;
   grid-row: 3 / 5;      
   align-self: center;
   justify-self: center;
+  grid-template-rows: 
+  minmax(60px, auto)
+  minmax(60px, auto)
+  1fr
+  1fr;
   width: 100%;
   max-width: 220px;
   min-height: 100px;
-  max-height: 150px;
+  max-height: 140px;
   padding: 0.75rem 0.9rem;
   border-radius: 8px;
+  font-size: clamp(0.8rem, 0.9vw, 0.95rem);
 }
 
 /* Texte innerhalb der Box */
@@ -584,13 +591,18 @@ main {
     display: grid;
     place-items: center;
   }
+ .layout-btns {
+  grid-row: 1;
+ }
+
 
 .postcard-front,
   .postcard-back {
     display: none;
     width: min(86vw, 420px);      
     height: auto;
-    aspect-ratio: 2 / 3;          
+    aspect-ratio: 2 / 3;  
+    grid-row: 2;        
     
   } 
 
