@@ -129,7 +129,7 @@ margin: 1rem 1rem;
  background: transparent;
  font-size: 0.85rem;
  line-height: 1;
- width: 6rem;
+ width: 5rem;
  height: 3rem;
 }
 
@@ -408,7 +408,6 @@ height: 69vh;
 .stamp-info-box {
   grid-column: 2 / 4;  
   grid-row: 3 / 5;
-
   align-self: center;
   justify-self: center;
   grid-template-rows: 
@@ -419,10 +418,10 @@ height: 69vh;
   width: 100%;
   max-width: 220px;
   min-height: 100px;
-  max-height: 140px;
+  max-height: 150px;
   padding: 0.75rem 0.9rem;
   border-radius: 8px;
-  font-size: clamp(0.8rem, 0.9vw, 0.95rem);
+  font-size: 0.95rem;
 }
 
 /* Texte innerhalb der Box */
@@ -530,6 +529,8 @@ height: 69vh;
   z-index: 10;
 }
 
+
+
 }
 
 
@@ -625,14 +626,15 @@ main {
   display: block;
   width: 100%;
   font-size: 16px;          /* wichtig: verhindert iOS-Zoom */
-  padding: 10px 12px;
-  min-height: 44px;         /* Apple Touch Guideline */
+  padding: 0;
+  min-height: 30px;         /* Apple Touch Guideline */
   border-radius: 8px;
 }
 
 
 .stamp-info-box {
-  max-height: 120px;
+  max-height: 110px;
+  font-size: 0.75rem;
  }  
 
   footer {
