@@ -23,9 +23,11 @@ __Beim Deployment traten 404‑Fehler auf, weil der assets‑Ordner zunächst ni
 **Sonstige Anmerkungen**
 __Wir entschieden uns in der mobilen Ansicht doch nicht einfach eine scrollbare Version zu gestalten, sondern gestalteten die Tabs Front und Back – Ansicht Vorder‑ und Rückseite separat, da wir diese Version als handlicher und schöner empfanden fürs mobile Design.__
 __Wir entschieden uns das Info-Overlay, welches sich beim Klicken auf den Info-Button oben rechts im Popup öffnet, mit einem X Button zu versehen zur Schliessung. Wir fanden es handlicher, nach dem man auf der linken Seite scrollte, als wieder auf den Info-Button zu klicken.__
+__Bei den Pollen gibt es auf der Website nur einen Wert von 0 an, egal welches Datum und welche Uhrzeit man auswählt. Wir haben die API mehrmals getestet und dort wurde auch immer einen Wert von 0 ausgespielt. Die Datenbank nimmt die Daten also korrekt auf.__
 
 **Genutzte Ressourcen**
 __Dokumentation und Beispiele zu HTML, CSS (Flexbox, Grid, transform) und JavaScript für DOM‑Manipulation und Fetch‑Requests.__
 __PHP‑Know‑how und Unterstützung meines Chefs zur Anbindung der API‑Endpunkte (getLatestByCity, getByDate etc.) und zum Verständnis der Backend‑Logik.__
 __Hosting‑/FTP‑Dokumentation von Infomaniak für das Hochladen der Website und das korrekte Einrichten der Ordnerstruktur.__
 __Perplexity wurde genutzt, um Verständnisfragen zu Frontend–Backend‑Zusammenspiel, API‑Aufrufen und Deployment (Assets, Ordnerstruktur) zu klären.__
+
